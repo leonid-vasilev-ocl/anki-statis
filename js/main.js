@@ -203,6 +203,23 @@ class StateManager {
     this.updateFilters({ selectedDecks });
   }
   
+  toggleTheme() {
+    this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark';
+    this.notifySubscribers('themeChange');
+    // Save to localStorage
+    localStorage.setItem('ankiStats_theme', this.state.theme);
+    return this.state.theme;
+  }
+  
+  setLanguage(language) {
+    if (['en', 'ru'].includes(language)) {
+      this.state.language = language;
+      this.notifySubscribers('languageChange');
+      // Save to localStorage
+      localStorage.setItem('ankiStats_language', this.state.language);
+    }
+  }
+  
   subscribe(event, callback) {
     if (!this.subscribers[event]) {
       this.subscribers[event] = [];
