@@ -229,7 +229,18 @@ class StateManager {
   
   notifySubscribers(event) {
     if (this.subscribers[event]) {
-      this.subscribers[event].forEach(callback => callback());
+      this.subscribers[event].forEach(callback => {
+        // Pass state information based on event type
+        if (event === 'themeChange') {
+          callback({ newState: { theme: this.state.theme } });
+        } else if (event === 'languageChange') {
+          callback({ newState: { language: this.state.language } });
+        } else if (event === 'filterChange') {
+          callback({ newState: { filters: this.state.filters } });
+        } else {
+          callback({ newState: this.state });
+        }
+      });
     }
   }
   
