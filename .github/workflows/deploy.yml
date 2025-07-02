@@ -1,0 +1,49 @@
+# GitHub Pages Deployment (Manual Trigger Only)
+# This workflow deploys the frontend to GitHub Pages
+# It does NOT automatically update Anki data - that must be done manually from your PC
+
+name: Deploy to GitHub Pages
+
+on:
+  # Manual trigger only
+  workflow_dispatch:
+  
+  # Trigger when pushing to main branch (for frontend code updates)
+  push:
+    branches: [ main ]
+    paths:
+      - 'public/**'
+      - 'css/**'
+      - 'js/**'
+      - '.github/workflows/deploy.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

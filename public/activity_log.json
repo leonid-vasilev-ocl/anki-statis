@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "created": "2025-06-16T10:00:00.000Z",
+    "last_updated": "2025-07-02T12:00:00.000Z",
+    "total_days_tracked": 16,
+    "version": "1.0"
+  },
+  "daily_activity": {
+    "2025-06-16": {
+      "reviews": [
+        {
+          "note_id": "1428316106586",
+          "deck_name": "Finnish::Grammar",
+          "anki_level": "Mature",
+          "finnish": "pyörimisakseli",
+          "translation": "ось, ось вращения",
+          "timestamp": "2025-06-16 17:32:17"
+        },
+        {
+          "note_id": "1429469501807",
+          "deck_name": "Finnish::Grammar",
+          "anki_level": "Young",
+          "finnish": "keikka",
+          "translation": "музыкальное представление, выступление, концерт",
+          "timestamp": "2025-06-16 17:32:28"
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1399204142011",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Young",
+          "finnish": "He puhuvat suomea hyvin huonosti",
+          "translation": "Они говорят по фински очень плохо",
+          "timestamp": "2025-06-16 17:51:14"
+        },
+        {
+          "note_id": "1399204181416",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Mature",
+          "finnish": "Ahkeruus voittaa kaiken",
+          "translation": "Усердие побеждает всё",
+          "timestamp": "2025-06-16 17:51:41"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 2,
+        "total_new_studies": 2,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Grammar", "Finnish::Phrases"]
+      }
+    },
+    "2025-06-17": {
+      "reviews": [
+        {
+          "note_id": "1399204142011",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Young",
+          "finnish": "He puhuvat suomea hyvin huonosti",
+          "translation": "Они говорят по фински очень плохо",
+          "timestamp": "2025-06-17 16:55:57"
+        },
+        {
+          "note_id": "1399204181416",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Mature",
+          "finnish": "Ahkeruus voittaa kaiken",
+          "translation": "Усердие побеждает всё",
+          "timestamp": "2025-06-17 17:14:01"
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1399207747067",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Young",
+          "finnish": "Kello on puoli kuusi",
+          "translation": "Время — половина шестого",
+          "timestamp": "2025-06-17 17:15:37"
+        },
+        {
+          "note_id": "1418471664190",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Relearning",
+          "finnish": "tölkki",
+          "translation": "банка, консервная банка",
+          "timestamp": "2025-06-17 08:58:17"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 2,
+        "total_new_studies": 2,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Phrases", "Finnish::Words"]
+      }
+    },
+    "2025-06-18": {
+      "reviews": [
+        {
+          "note_id": "1436706106406",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "sivuuttaa",
+          "translation": "пренебрегать, игнорировать",
+          "timestamp": "2025-06-18 14:05:12"
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1428053031967",
+          "deck_name": "Finnish::Words",
+          "anki_level": "New",
+          "finnish": "penkoa",
+          "translation": "рыться, искать, разузнавать, обыскивать",
+          "timestamp": "2025-06-18 14:04:52"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 1,
+        "total_new_studies": 1,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Words"]
+      }
+    },
+    "2025-06-19": {
+      "reviews": [
+        {
+          "note_id": "1419178041871",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Mature",
+          "finnish": "päättää",
+          "translation": "решать, решить",
+          "timestamp": "2025-06-19 20:48:23"
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1413471996727",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "humalainen",
+          "translation": "пьяный",
+          "timestamp": "2025-06-19 20:48:36"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 1,
+        "total_new_studies": 1,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Words"]
+      }
+    },
+    "2025-06-20": {
+      "reviews": [],
+      "new_studies": [],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 0,
+        "total_new_studies": 0,
+        "total_level_changes": 0,
+        "decks_studied": []
+      }
+    },
+    "2025-06-21": {
+      "reviews": [
+        {
+          "note_id": "1424206536668",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "haastaa",
+          "translation": "бросать вызов",
+          "timestamp": "2025-06-21 14:33:15"
+        }
+      ],
+      "new_studies": [],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 1,
+        "total_new_studies": 0,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Words"]
+      }
+    },
+    "2025-06-22": {
+      "reviews": [
+        {
+          "note_id": "1413471996727",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "humalainen",
+          "translation": "пьяный",
+          "timestamp": "2025-06-22 21:17:42"
+        },
+        {
+          "note_id": "1424206536668",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "haastaa",
+          "translation": "бросать вызов",
+          "timestamp": "2025-06-22 21:14:33"
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1416162861920",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "reisi",
+          "translation": "бедро",
+          "timestamp": "2025-06-22 21:09:10"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 2,
+        "total_new_studies": 1,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Words"]
+      }
+    },
+    "2025-06-23": {
+      "reviews": [],
+      "new_studies": [],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 0,
+        "total_new_studies": 0,
+        "total_level_changes": 0,
+        "decks_studied": []
+      }
+    },
+    "2025-06-24": {
+      "reviews": [
+        {
+          "note_id": "1416162861920",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "reisi",
+          "translation": "бедро",
+          "timestamp": "2025-06-24 10:15:53"
+        }
+      ],
+      "new_studies": [],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 1,
+        "total_new_studies": 0,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Words"]
+      }
+    },
+    "2025-07-01": {
+      "reviews": [
+        {
+          "note_id": "1399204142011",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Young",
+          "finnish": "He puhuvat suomea hyvin huonosti",
+          "translation": "Они говорят по фински очень плохо",
+          "timestamp": "2025-07-01 16:55:57"
+        },
+        {
+          "note_id": "1399204181416",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Mature",
+          "finnish": "Ahkeruus voittaa kaiken",
+          "translation": "Усердие побеждает всё",
+          "timestamp": "2025-07-01 17:14:01"
+        },
+        {
+          "note_id": "1399207747067",
+          "deck_name": "Finnish::Phrases",
+          "anki_level": "Young",
+          "finnish": "Kello on puoli kuusi",
+          "translation": "Время — половина шестого",
+          "timestamp": "2025-07-01 17:36:17"
+        },
+        {
+          "note_id": "1413471996727",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "humalainen",
+          "translation": "пьяный",
+          "timestamp": "2025-07-01 21:17:42"
+        },
+        {
+          "note_id": "1419178041871",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Mature",
+          "finnish": "päättää",
+          "translation": "решать, решить",
+          "timestamp": "2025-07-01 20:48:23"
+        }
+      ],
+      "new_studies": [],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 5,
+        "total_new_studies": 0,
+        "total_level_changes": 0,
+        "decks_studied": ["Finnish::Phrases", "Finnish::Words"]
+      }
+    }
+  }
+}
