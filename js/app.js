@@ -80,7 +80,7 @@ class AnkiStatsApp {
       console.log('Loading data...');
       
       // Load main CSV data
-      const csvResponse = await fetch('/anki_stats.csv');
+      const csvResponse = await fetch('./anki_stats.csv');
       if (!csvResponse.ok) {
         throw new Error(`Failed to load CSV data: ${csvResponse.status}`);
       }
@@ -91,7 +91,7 @@ class AnkiStatsApp {
       
       // Load activity log (optional)
       try {
-        const activityResponse = await fetch('/activity_log.json');
+        const activityResponse = await fetch('./activity_log.json');
         if (activityResponse.ok) {
           const activityJson = await activityResponse.json();
           this.activityData = this.dataParser.parseActivityLog(activityJson.daily_activity || {});
