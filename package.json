@@ -1,0 +1,27 @@
+{
+  "name": "anki-stats-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive Anki statistics dashboard with charts and internationalization",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "npm run dev"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0"
+  },
+  "keywords": [
+    "anki",
+    "statistics",
+    "dashboard",
+    "charts",
+    "internationalization"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -35,6 +35,9 @@ A modern, interactive web dashboard for visualizing your Anki learning statistic
 git clone https://github.com/yourusername/anki-stats.git
 cd anki-stats
 
+# Install dependencies
+npm install
+
 # Make scripts executable
 chmod +x scripts/*.sh deploy_manual.sh
 ```
@@ -47,10 +50,20 @@ ANKI_DB_PATH="/Users/levas/Library/Application Support/Anki2/User 1/collection.a
 EXPORT_SCRIPT_PATH="/Users/levas/Library/Application Support/Anki2/User 1/export_anki_notes.py"
 ```
 
-### 3. Initial Setup
+### 3. Development & Testing
 ```bash
+# Start development server
+npm run dev
+# Opens at http://localhost:3000
+
+# Or use the custom script
+./serve_local.sh
+
 # Test your export script first
 python3 "/path/to/your/export_anki_notes.py" test_export.csv
+
+# Build for production
+npm run build
 
 # Run initial deployment
 ./deploy_manual.sh

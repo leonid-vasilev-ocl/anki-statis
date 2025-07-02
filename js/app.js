@@ -17,18 +17,7 @@ class AnkiStatsApp {
     this.cardsData = null;
     this.activityData = null;
     
-    // Bind methods
-    this.init = this.init.bind(this);
-    this.loadData = this.loadData.bind(this);
-    this.setupEventListeners = this.setupEventListeners.bind(this);
-    this.updateUI = this.updateUI.bind(this);
-    
-    // Initialize app when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', this.init);
-    } else {
-      this.init();
-    }
+    // Initialization will be called manually after DOM is ready
   }
   
   /**
@@ -37,6 +26,11 @@ class AnkiStatsApp {
   async init() {
     try {
       console.log('Initializing Anki Stats Dashboard...');
+      
+      // Check if required libraries are loaded
+      if (typeof Chart === 'undefined') {
+        throw new Error('Chart.js library not loaded');
+      }
       
       // Apply saved theme immediately
       this.applyTheme(this.stateManager.getState('theme'));
@@ -73,7 +67,8 @@ class AnkiStatsApp {
       
     } catch (error) {
       console.error('Failed to initialize application:', error);
-      this.showError('Failed to load application. Please refresh the page.');
+      this.setLoadingState(false);
+      this.showError(`Failed to load application: ${error.message}`);
     }
   }
   
@@ -85,7 +80,7 @@ class AnkiStatsApp {
       console.log('Loading data...');
       
       // Load main CSV data
-      const csvResponse = await fetch('anki_stats.csv');
+      const csvResponse = await fetch('/anki_stats.csv');
       if (!csvResponse.ok) {
         throw new Error(`Failed to load CSV data: ${csvResponse.status}`);
       }
@@ -96,7 +91,7 @@ class AnkiStatsApp {
       
       // Load activity log (optional)
       try {
-        const activityResponse = await fetch('activity_log.json');
+        const activityResponse = await fetch('/activity_log.json');
         if (activityResponse.ok) {
           const activityJson = await activityResponse.json();
           this.activityData = this.dataParser.parseActivityLog(activityJson.daily_activity || {});
@@ -121,6 +116,9 @@ class AnkiStatsApp {
    */
   async initializeComponents() {
     try {
+      // DOM elements are guaranteed to exist at this point due to pre-check
+      console.log('Initializing charts and components...');
+      
       // Initialize charts
       await this.chartsManager.initializeCharts(this.cardsData, this.activityData);
       
@@ -595,14 +593,24 @@ class AnkiStatsApp {
   setLoadingState(loading) {
     this.isLoading = loading;
     
-    // Show/hide loading indicators
-    const loadingElements = document.querySelectorAll('.loading');
-    const chartContainers = document.querySelectorAll('.chart-container');
-    
     if (loading) {
+      // Add loading overlay instead of replacing content
+      const chartContainers = document.querySelectorAll('.chart-container');
       chartContainers.forEach(container => {
-        container.innerHTML = '<div class="loading">Loading data...</div>';
+        // Only add loading if not already present
+        if (!container.querySelector('.loading-overlay')) {
+          const overlay = document.createElement('div');
+          overlay.className = 'loading-overlay';
+          overlay.innerHTML = '<div class="loading">Loading data...</div>';
+          overlay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000;';
+          container.style.position = 'relative';
+          container.appendChild(overlay);
+        }
       });
+    } else {
+      // Remove loading overlays
+      const loadingOverlays = document.querySelectorAll('.loading-overlay');
+      loadingOverlays.forEach(overlay => overlay.remove());
     }
   }
   
@@ -665,5 +673,4 @@ class AnkiStatsApp {
   }
 }
 
-// Initialize the application
-const app = new AnkiStatsApp();
+// Note: Application is initialized in index.html after DOM is ready

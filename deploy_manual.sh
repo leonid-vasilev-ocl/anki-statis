@@ -178,6 +178,42 @@ EOF
     fi
 }
 
+build_frontend() {
+    log "INFO" "Building frontend application..."
+    
+    # Copy data files to public folder for build process
+    cp "$WORK_DIR/$TODAY_EXPORT" "public/$CURRENT_EXPORT"
+    cp "$WORK_DIR/$ACTIVITY_LOG" "public/$ACTIVITY_LOG"
+    log "SUCCESS" "Copied data files to public folder"
+    
+    # Check if npm is available and package.json exists
+    if command -v npm &> /dev/null && [ -f "package.json" ]; then
+        log "INFO" "Installing dependencies..."
+        npm install
+        
+        log "INFO" "Building project with Vite..."
+        if npm run build; then
+            log "SUCCESS" "Build completed successfully"
+            
+            # Replace public folder contents with built files
+            if [ -d "dist" ]; then
+                rm -rf public/*
+                cp -r dist/* public/
+                log "SUCCESS" "Deployed built files to public folder"
+            else
+                log "ERROR" "Build output directory 'dist' not found"
+                exit 1
+            fi
+        else
+            log "ERROR" "Build failed"
+            exit 1
+        fi
+    else
+        log "WARNING" "npm not found or package.json missing, skipping build process..."
+        log "INFO" "Using files directly without build optimization"
+    fi
+}
+
 commit_and_push() {
     log "INFO" "Committing and pushing changes to GitHub..."
     
@@ -290,6 +326,7 @@ main() {
     backup_current_data
     export_fresh_data
     update_activity_log
+    build_frontend
     commit_and_push
     cleanup
     show_summary

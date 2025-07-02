@@ -1,24 +1,24 @@
 #!/bin/bash
-"""
-Daily Update Script for Anki Stats Dashboard
-
-Automates the daily process of:
-1. Backing up previous export
-2. Generating new export from Anki database
-3. Detecting changes between exports
-4. Updating activity log with changes
-5. Copying files to frontend public folder
-6. Cleaning up old files
-
-Usage:
-    ./daily_update.sh [anki_db_path] [frontend_public_path]
-
-Environment Variables:
-    ANKI_DB_PATH: Path to Anki collection.anki2 database
-    FRONTEND_PUBLIC_PATH: Path to frontend public folder
-    EXPORT_SCRIPT_PATH: Path to export_anki_notes.py script
-    KEEP_BACKUPS_DAYS: Number of days to keep backup files (default: 30)
-"""
+#
+# Daily Update Script for Anki Stats Dashboard
+#
+# Automates the daily process of:
+# 1. Backing up previous export
+# 2. Generating new export from Anki database
+# 3. Detecting changes between exports
+# 4. Updating activity log with changes
+# 5. Copying files to frontend public folder
+# 6. Cleaning up old files
+#
+# Usage:
+#     ./daily_update.sh [anki_db_path] [frontend_public_path]
+#
+# Environment Variables:
+#     ANKI_DB_PATH: Path to Anki collection.anki2 database
+#     FRONTEND_PUBLIC_PATH: Path to frontend public folder
+#     EXPORT_SCRIPT_PATH: Path to export_anki_notes.py script
+#     KEEP_BACKUPS_DAYS: Number of days to keep backup files (default: 30)
+#
 
 set -e  # Exit on any error
 
@@ -50,7 +50,7 @@ LOGS_DIR="$PROJECT_DIR/logs"
 
 # File names
 TODAY_EXPORT="anki_export_$DATE.csv"
-YESTERDAY_EXPORT="anki_export_$(date -d 'yesterday' +%Y-%m-%d).csv"
+YESTERDAY_EXPORT="anki_export_$(date -v-1d +%Y-%m-%d).csv"
 CURRENT_EXPORT="anki_stats.csv"
 CHANGES_FILE="changes_$DATE.json"
 ACTIVITY_LOG="activity_log.json"
@@ -69,6 +69,9 @@ log() {
     shift
     local message="$*"
     local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    
+    # Ensure log directory exists
+    mkdir -p "$(dirname "$LOG_FILE")"
     
     # Color the output based on level
     case "$level" in

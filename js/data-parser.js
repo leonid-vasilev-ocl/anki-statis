@@ -149,16 +149,30 @@ class DataParser {
    * @returns {Object} Processed activity data
    */
   parseActivityLog(activityLog) {
+    console.log('parseActivityLog called with:', Object.keys(activityLog || {}).length, 'days');
+    console.log('Sample activity data:', Object.entries(activityLog || {}).slice(0, 2));
+    
     const processedActivity = {};
 
     for (const [date, activities] of Object.entries(activityLog)) {
+      const reviewsCount = activities.reviews?.length || 0;
+      const newStudiesCount = activities.new_studies?.length || 0;
+      const totalActivity = reviewsCount + newStudiesCount;
+      
       processedActivity[date] = {
         date: new Date(date),
         reviews: activities.reviews || [],
         newStudies: activities.new_studies || [],
-        totalActivity: (activities.reviews?.length || 0) + (activities.new_studies?.length || 0)
+        totalActivity: totalActivity
       };
+      
+      if (totalActivity > 0) {
+        console.log(`Activity for ${date}: ${reviewsCount} reviews + ${newStudiesCount} new studies = ${totalActivity} total`);
+      }
     }
+
+    console.log('Processed activity data:', Object.keys(processedActivity).length, 'days');
+    console.log('Days with activity:', Object.values(processedActivity).filter(day => day.totalActivity > 0).length);
 
     this.historyData = processedActivity;
     return processedActivity;
@@ -326,16 +340,29 @@ class DataParser {
    * @returns {Array} Heatmap data
    */
   getHeatmapData(year = new Date().getFullYear()) {
-    if (!this.historyData) return [];
+    console.log('getHeatmapData called for year:', year);
+    console.log('historyData available:', !!this.historyData);
+    console.log('historyData keys:', Object.keys(this.historyData || {}));
+    
+    if (!this.historyData) {
+      console.log('No historyData available for heatmap');
+      return [];
+    }
 
     const heatmapData = [];
     const startDate = new Date(year, 0, 1);
     const endDate = new Date(year, 11, 31);
+    let activeDaysFound = 0;
 
     for (let current = new Date(startDate); current <= endDate; current.setDate(current.getDate() + 1)) {
       const dateStr = current.toISOString().split('T')[0];
       const activity = this.historyData[dateStr];
       const totalActivity = activity?.totalActivity || 0;
+      
+      if (totalActivity > 0) {
+        activeDaysFound++;
+        console.log(`Found activity for ${dateStr}: ${totalActivity}`);
+      }
 
       heatmapData.push({
         date: new Date(current),
@@ -344,7 +371,8 @@ class DataParser {
         intensity: this.getIntensityLevel(totalActivity)
       });
     }
-
+    
+    console.log(`Generated heatmap data: ${heatmapData.length} days, ${activeDaysFound} with activity`);
     return heatmapData;
   }
 

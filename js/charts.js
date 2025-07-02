@@ -11,11 +11,6 @@ class ChartsManager {
     this.charts = new Map(); // Store chart instances
     this.chartConfigs = new Map(); // Store chart configurations
     
-    // Bind methods
-    this.initializeCharts = this.initializeCharts.bind(this);
-    this.updateCharts = this.updateCharts.bind(this);
-    this.destroyCharts = this.destroyCharts.bind(this);
-    
     // Subscribe to state changes
     this.stateManager.subscribe('languageChange', () => this.updateChartsLanguage());
     this.stateManager.subscribe('themeChange', () => this.updateChartsTheme());
@@ -29,18 +24,38 @@ class ChartsManager {
    */
   async initializeCharts(cardsData, activityData) {
     try {
+      console.log('Initializing charts with data:', { 
+        cardsCount: cardsData?.length, 
+        activityDays: Object.keys(activityData || {}).length 
+      });
+      
       this.cardsData = cardsData;
       this.activityData = activityData;
       
+      // Set activity data in data parser for heatmap
+      if (activityData) {
+        // Extract daily_activity from the nested structure
+        const dailyActivityData = activityData.daily_activity || activityData;
+        this.dataParser.parseActivityLog(dailyActivityData);
+      }
+      
       // Create charts in order
+      console.log('Creating level distribution chart...');
       await this.createLevelDistributionChart();
+      
+      console.log('Creating deck performance chart...');
       await this.createDeckPerformanceChart();
+      
+      console.log('Creating study timeline chart...');
       await this.createStudyTimelineChart();
+      
+      console.log('Creating activity heatmap...');
       await this.createActivityHeatmap();
       
       console.log('All charts initialized successfully');
     } catch (error) {
       console.error('Error initializing charts:', error);
+      throw error;
     }
   }
   
@@ -49,11 +64,17 @@ class ChartsManager {
    */
   async createLevelDistributionChart() {
     const canvas = document.getElementById('levelChart');
-    if (!canvas) return;
+    if (!canvas) {
+      console.error('levelChart canvas not found!');
+      return;
+    }
     
+    console.log('Canvas found, getting context...');
     const ctx = canvas.getContext('2d');
     const filteredData = this.getFilteredData();
+    console.log('Filtered data:', filteredData?.length, 'cards');
     const levelDistribution = this.dataParser.getLevelDistribution(filteredData);
+    console.log('Level distribution:', levelDistribution);
     
     // Prepare data for Chart.js
     const labels = Object.keys(levelDistribution).map(level => this.i18n.t(`levels.${level}`));
@@ -129,7 +150,13 @@ class ChartsManager {
       this.charts.get('levelChart').destroy();
     }
     
+    console.log('Creating Chart.js instance...');
+    console.log('Chart.js available:', typeof Chart !== 'undefined');
+    console.log('Config:', config);
+    
     const chart = new Chart(ctx, config);
+    console.log('Chart created successfully:', chart);
+    
     this.charts.set('levelChart', chart);
     this.chartConfigs.set('levelChart', config);
   }
@@ -336,35 +363,57 @@ class ChartsManager {
    */
   async createActivityHeatmap() {
     const container = document.getElementById('heatmapChart');
-    if (!container) return;
+    if (!container) {
+      console.error('Heatmap container not found!');
+      return;
+    }
     
     const year = this.stateManager.getState('chartStates.heatmapYear');
     const heatmapData = this.dataParser.getHeatmapData(year);
     
+    // Debug: Check if we have activity data for current dates
+    const activeDays = heatmapData.filter(d => d.activity > 0);
+    console.log(`Heatmap: ${activeDays.length} active days found for ${year}`);
+    
     // Clear existing heatmap
     container.innerHTML = '';
     
-    // Create heatmap grid
+    // Create heatmap grid - override CSS with important declarations
     const grid = document.createElement('div');
-    grid.className = 'heatmap-grid';
     grid.style.cssText = `
-      display: grid;
-      grid-template-columns: repeat(53, 1fr);
-      gap: 2px;
-      padding: 1rem 0;
-      height: 200px;
-      overflow-x: auto;
+      display: grid !important;
+      grid-template-columns: repeat(53, 12px) !important;
+      grid-template-rows: repeat(7, 12px) !important;
+      gap: 2px !important;
+      padding: 10px !important;
+      overflow-x: auto !important;
+      width: fit-content !important;
+      height: fit-content !important;
+      max-width: 100% !important;
     `;
     
     heatmapData.forEach(dayData => {
       const cell = document.createElement('div');
-      cell.className = `heatmap-cell activity-${dayData.intensity}`;
+      cell.className = `activity-${dayData.intensity}`;
+      
+      // Set background color based on intensity
+      let backgroundColor = '#f0f0f0'; // default/empty
+      if (dayData.intensity === 1) backgroundColor = 'rgba(76, 175, 80, 0.3)';
+      if (dayData.intensity === 2) backgroundColor = 'rgba(76, 175, 80, 0.5)';
+      if (dayData.intensity === 3) backgroundColor = 'rgba(76, 175, 80, 0.7)';
+      if (dayData.intensity === 4) backgroundColor = 'rgba(76, 175, 80, 0.9)';
+      if (dayData.intensity === 5) backgroundColor = 'rgba(76, 175, 80, 1)';
+      
       cell.style.cssText = `
-        width: 12px;
-        height: 12px;
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        width: 12px !important;
+        height: 12px !important;
+        background-color: ${backgroundColor} !important;
+        border-radius: 2px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
       `;
       
       // Add tooltip
@@ -377,7 +426,7 @@ class ChartsManager {
       
       // Add hover effect
       cell.addEventListener('mouseenter', () => {
-        cell.style.transform = 'scale(1.2)';
+        cell.style.transform = 'scale(1.1)';
         cell.style.border = '1px solid var(--accent-primary)';
       });
       
