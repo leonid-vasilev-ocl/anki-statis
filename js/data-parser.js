@@ -512,3 +512,6 @@ class DataParser {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { DataParser };
 }
+
+// ES6 export
+export { DataParser };

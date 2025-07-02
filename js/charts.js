@@ -679,3 +679,6 @@ class ChartsManager {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { ChartsManager };
 }
+
+// ES6 export
+export { ChartsManager };

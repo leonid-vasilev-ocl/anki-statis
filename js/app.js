@@ -673,4 +673,7 @@ class AnkiStatsApp {
   }
 }
 
+// ES6 export
+export { AnkiStatsApp };
+
 // Note: Application is initialized in index.html after DOM is ready
