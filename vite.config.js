@@ -11,9 +11,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    copyPublicDir: true,
     rollupOptions: {
       input: {
         main: 'index.html'
+      },
+      output: {
+        // Preserve file names for CSV/JSON files for easier debugging
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith('.csv') || assetInfo.name?.endsWith('.json')) {
+            return '[name][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        }
       }
     }
   },

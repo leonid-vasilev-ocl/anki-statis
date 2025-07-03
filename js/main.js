@@ -4,9 +4,14 @@
  */
 
 import Chart from 'chart.js/auto';
+import DataTable from 'datatables.net';
+import 'datatables.net-dt/css/dataTables.dataTables.css';
+import 'datatables.net-responsive';
+import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 
-// Make Chart available globally for the existing code
+// Make Chart and DataTable available globally for the existing code
 window.Chart = Chart;
+window.DataTable = DataTable;
 
 // Import all modules directly - we'll need to convert them to ES6 modules
 // For now, let's inline the essential classes to get it working
@@ -14,63 +19,20 @@ window.Chart = Chart;
 // I18n class (complete version)
 class I18n {
   constructor() {
-    this.currentLanguage = 'en';
+    // Load saved language from localStorage
+    const savedLanguage = localStorage.getItem('ankiStats_language') || localStorage.getItem('anki-stats-language') || 'en';
+    this.currentLanguage = ['en', 'ru'].includes(savedLanguage) ? savedLanguage : 'en';
+    // Basic translations - full translations will be loaded from translations.js
     this.translations = {
       en: {
         title: 'Anki Statistics Dashboard',
-        'charts.levelDistribution': 'Card Level Distribution',
-        'charts.deckPerformance': 'Deck Performance',
-        'charts.studyTimeline': 'Study Timeline',
-        'charts.activityHeatmap': 'Study Activity Heatmap',
-        'charts.cardExplorer': 'Card Explorer',
-        'levels.New': 'New',
-        'levels.Learning': 'Learning',
-        'levels.Young': 'Young',
-        'levels.Mature': 'Mature',
-        'levels.Relearning': 'Relearning',
-        'levels.Suspended': 'Suspended',
-        'levels.Scheduler Buried': 'Buried',
-        'levels.User Buried': 'User Buried',
-        'filters.allDecks': 'All Decks',
-        'filters.allLevels': 'All Levels',
-        'filters.searchCards': 'Search cards...',
-        'filters.clear': 'Clear',
-        'timeline.week': 'Week',
-        'timeline.month': 'Month', 
-        'timeline.year': 'Year',
-        'table.finnish': 'Finnish',
-        'table.translation': 'Translation',
-        'table.level': 'Level',
-        'table.deck': 'Deck',
-        'table.lastReview': 'Last Review'
+        'stats.cards': 'cards',
+        'stats.words': 'words'
       },
       ru: {
-        title: 'Панель статистики Anki',
-        'charts.levelDistribution': 'Распределение уровней карт',
-        'charts.deckPerformance': 'Производительность колод',
-        'charts.studyTimeline': 'График изучения',
-        'charts.activityHeatmap': 'Тепловая карта активности',
-        'charts.cardExplorer': 'Исследователь карт',
-        'levels.New': 'Новые',
-        'levels.Learning': 'Изучение',
-        'levels.Young': 'Молодые',
-        'levels.Mature': 'Зрелые',
-        'levels.Relearning': 'Переизучение',
-        'levels.Suspended': 'Приостановленные',
-        'levels.Scheduler Buried': 'Скрытые',
-        'levels.User Buried': 'Скрытые пользователем',
-        'filters.allDecks': 'Все колоды',
-        'filters.allLevels': 'Все уровни',
-        'filters.searchCards': 'Поиск карт...',
-        'filters.clear': 'Очистить',
-        'timeline.week': 'Неделя',
-        'timeline.month': 'Месяц',
-        'timeline.year': 'Год',
-        'table.finnish': 'Финский',
-        'table.translation': 'Перевод',
-        'table.level': 'Уровень',
-        'table.deck': 'Колода',
-        'table.lastReview': 'Последний просмотр'
+        title: 'Панель статистики Anki', 
+        'stats.cards': 'карт',
+        'stats.words': 'слов'
       }
     };
   }
@@ -82,6 +44,8 @@ class I18n {
   setLanguage(lang) {
     if (this.translations[lang]) {
       this.currentLanguage = lang;
+      // Save to localStorage
+      localStorage.setItem('ankiStats_language', lang);
     }
   }
   
@@ -122,9 +86,13 @@ class I18n {
 // Complete StateManager
 class StateManager {
   constructor() {
+    // Load saved settings from localStorage
+    const savedTheme = localStorage.getItem('ankiStats_theme') || localStorage.getItem('anki-stats-theme') || 'dark';
+    const savedLanguage = localStorage.getItem('ankiStats_language') || localStorage.getItem('anki-stats-language') || 'en';
+    
     this.state = {
-      theme: 'dark',
-      language: 'en',
+      theme: ['dark', 'light'].includes(savedTheme) ? savedTheme : 'dark',
+      language: ['en', 'ru'].includes(savedLanguage) ? savedLanguage : 'en',
       filters: {
         selectedDecks: [],
         selectedLevels: [],
@@ -230,15 +198,19 @@ class StateManager {
   notifySubscribers(event) {
     if (this.subscribers[event]) {
       this.subscribers[event].forEach(callback => {
-        // Pass state information based on event type
-        if (event === 'themeChange') {
-          callback({ newState: { theme: this.state.theme } });
-        } else if (event === 'languageChange') {
-          callback({ newState: { language: this.state.language } });
-        } else if (event === 'filterChange') {
-          callback({ newState: { filters: this.state.filters } });
-        } else {
-          callback({ newState: this.state });
+        try {
+          // Pass state information based on event type
+          if (event === 'themeChange') {
+            callback({ newState: { theme: this.state.theme } });
+          } else if (event === 'languageChange') {
+            callback({ newState: { language: this.state.language } });
+          } else if (event === 'filterChange') {
+            callback({ newState: { filters: this.state.filters } });
+          } else {
+            callback({ newState: this.state });
+          }
+        } catch (error) {
+          console.error(`Error in ${event} callback:`, error);
         }
       });
     }
@@ -254,8 +226,11 @@ class StateManager {
 
 // Load the other classes by importing their text content and creating them
 async function loadModules() {
-    // Make the basic classes available globally first
-    window.I18n = I18n;
+    // Import full I18n class with complete translations
+    const { I18n: FullI18n } = await import('./translations.js');
+    window.I18n = FullI18n;
+    
+    // Make the basic classes available globally
     window.StateManager = StateManager;
     
     // Import DataParser class
@@ -284,30 +259,20 @@ async function initializeApp() {
         // Load modules
         await loadModules();
         
-        // Check if elements exist
-        const levelChart = document.getElementById('levelChart');
-        const deckChart = document.getElementById('deckChart');
-        const timelineChart = document.getElementById('timelineChart');
-        const heatmapChart = document.getElementById('heatmapChart');
-        
-        console.log('DOM Elements check:', {
-            levelChart: !!levelChart,
-            deckChart: !!deckChart,
-            timelineChart: !!timelineChart,
-            heatmapChart: !!heatmapChart
-        });
-        
-        if (!levelChart || !deckChart || !timelineChart || !heatmapChart) {
-            console.error('Chart elements not found in DOM');
-            console.log('Available elements with ID:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
-            return;
-        }
-        
-        // Initialize the app
+        // Initialize the app immediately - let it handle missing elements gracefully
         window.app = new window.AnkiStatsApp();
         await window.app.init();
     } catch (error) {
         console.error('Failed to initialize app:', error);
+        // Show user-friendly error
+        document.body.innerHTML = `
+            <div style="padding: 2rem; text-align: center; color: #e74c3c;">
+                <h2>Error Loading Application</h2>
+                <p>There was an error loading the Anki Stats Dashboard.</p>
+                <p>Error: ${error.message}</p>
+                <button onclick="window.location.reload()" style="padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer;">Reload Page</button>
+            </div>
+        `;
     }
 }
 

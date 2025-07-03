@@ -23,6 +23,9 @@ class DataParser {
     const headers = this.parseCSVLine(lines[0]);
     const data = [];
 
+    console.log('CSV Headers found:', headers);
+    console.log('Total CSV lines to process:', lines.length - 1);
+
     for (let i = 1; i < lines.length; i++) {
       const values = this.parseCSVLine(lines[i]);
       if (values.length === headers.length) {
@@ -31,9 +34,12 @@ class DataParser {
           card[header] = values[index];
         });
         data.push(this.processCard(card));
+      } else {
+        console.warn(`Line ${i + 1} has ${values.length} values but expected ${headers.length} - skipping`);
       }
     }
 
+    console.log(`Successfully parsed ${data.length} cards from CSV`);
     this.rawData = data;
     return data;
   }
@@ -77,6 +83,11 @@ class DataParser {
    * @returns {Object} Processed card data
    */
   processCard(card) {
+    // Debug log first few cards to understand data structure
+    if (this.rawData && this.rawData.length < 3) {
+      console.log('Card structure debug:', card);
+    }
+    
     // Parse JSON fields if present
     let fieldsData = {};
     try {
@@ -91,10 +102,17 @@ class DataParser {
     const firstStudyDate = card.first_study_date ? new Date(card.first_study_date) : null;
     const lastReviewDate = card.last_review_date ? new Date(card.last_review_date) : null;
 
+    // Handle level field with multiple fallbacks
+    let ankiLevel = card.anki_level || card.ankiLevel || card.level || card.Level;
+    if (!ankiLevel || ankiLevel === undefined || ankiLevel === null || ankiLevel === '') {
+      console.warn('Missing anki_level for card:', card.note_id, 'Available fields:', Object.keys(card));
+      ankiLevel = 'Unknown';
+    }
+
     return {
       ...card,
       noteId: card.note_id,
-      ankiLevel: card.anki_level,
+      ankiLevel: ankiLevel,
       deckName: card.deck_name,
       firstStudyDate,
       lastReviewDate,
@@ -150,7 +168,6 @@ class DataParser {
    */
   parseActivityLog(activityLog) {
     console.log('parseActivityLog called with:', Object.keys(activityLog || {}).length, 'days');
-    console.log('Sample activity data:', Object.entries(activityLog || {}).slice(0, 2));
     
     const processedActivity = {};
 
@@ -172,7 +189,6 @@ class DataParser {
     }
 
     console.log('Processed activity data:', Object.keys(processedActivity).length, 'days');
-    console.log('Days with activity:', Object.values(processedActivity).filter(day => day.totalActivity > 0).length);
 
     this.historyData = processedActivity;
     return processedActivity;
@@ -188,10 +204,19 @@ class DataParser {
 
     const distribution = {};
     cards.forEach(card => {
-      const level = card.ankiLevel || card.anki_level;
+      // Try multiple field names and provide fallback
+      let level = card.ankiLevel || card.anki_level || card.level || card.Level;
+      
+      // If still undefined, use a fallback based on other fields or default
+      if (!level || level === undefined || level === null) {
+        console.warn('Card missing level field:', card);
+        level = 'Unknown';
+      }
+      
       distribution[level] = (distribution[level] || 0) + 1;
     });
 
+    console.log('Level distribution calculated:', distribution);
     return distribution;
   }
 
@@ -216,7 +241,10 @@ class DataParser {
       }
 
       deckData[deckName].total++;
-      const level = card.ankiLevel || card.anki_level;
+      let level = card.ankiLevel || card.anki_level || card.level || card.Level;
+      if (!level || level === undefined || level === null) {
+        level = 'Unknown';
+      }
       deckData[deckName].levels[level] = (deckData[deckName].levels[level] || 0) + 1;
     });
 
@@ -226,9 +254,10 @@ class DataParser {
   /**
    * Get timeline data from activity log
    * @param {string} timeframe - 'week', 'month', or 'year'
+   * @param {string} locale - Locale for date formatting
    * @returns {Object} Timeline data
    */
-  getTimelineData(timeframe = 'month') {
+  getTimelineData(timeframe = 'month', locale = 'en-US') {
     if (!this.historyData) return { labels: [], datasets: [] };
 
     const now = new Date();
@@ -249,13 +278,13 @@ class DataParser {
       };
     });
 
-    const labels = dates.map(date => this.formatDateForTimeline(date, timeframe));
+    const labels = dates.map(date => this.formatDateForTimeline(date, timeframe, locale));
 
     return {
       labels,
       datasets: [
         {
-          label: 'Reviews',
+          label: 'Reviews', // Will be translated in ChartsManager
           data: dates.map(date => {
             const dateStr = date.toISOString().split('T')[0];
             return timelineData[dateStr].reviews;
@@ -265,7 +294,7 @@ class DataParser {
           tension: 0.1
         },
         {
-          label: 'New Cards',
+          label: 'New Cards', // Will be translated in ChartsManager
           data: dates.map(date => {
             const dateStr = date.toISOString().split('T')[0];
             return timelineData[dateStr].newCards;
@@ -319,18 +348,19 @@ class DataParser {
    * Format date for timeline labels
    * @param {Date} date - Date to format
    * @param {string} timeframe - Time period
+   * @param {string} locale - Locale for formatting
    * @returns {string} Formatted date
    */
-  formatDateForTimeline(date, timeframe) {
+  formatDateForTimeline(date, timeframe, locale = 'en-US') {
     switch (timeframe) {
       case 'week':
-        return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        return date.toLocaleDateString(locale, { weekday: 'short', month: 'short', day: 'numeric' });
       case 'month':
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
       case 'year':
-        return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return date.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
       default:
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
     }
   }
 
@@ -408,7 +438,10 @@ class DataParser {
 
       // Level filter
       if (filters.selectedLevels && filters.selectedLevels.length > 0) {
-        const level = card.ankiLevel || card.anki_level;
+        let level = card.ankiLevel || card.anki_level || card.level || card.Level;
+        if (!level || level === undefined || level === null) {
+          level = 'Unknown';
+        }
         if (!filters.selectedLevels.includes(level)) return false;
       }
 
@@ -430,8 +463,87 @@ class DataParser {
         if (filters.dateRange.end && cardDate > new Date(filters.dateRange.end)) return false;
       }
 
+      // Stat-based filters
+      if (filters.statFilter) {
+        switch (filters.statFilter.type) {
+          case 'newWordsToday':
+            return this.isCardNewToday(card);
+          case 'newWordsThisWeek':
+            return this.isCardNewThisWeek(card);
+          case 'studiedToday':
+            return this.isCardStudiedToday(card);
+          case 'totalCards':
+            // No filter needed - all cards
+            return true;
+          default:
+            return true;
+        }
+      }
+
       return true;
     });
+  }
+
+  /**
+   * Check if card was studied for the first time today
+   * @param {Object} card - Card data
+   * @returns {boolean} True if card is new today
+   */
+  isCardNewToday(card) {
+    if (!this.historyData) return false;
+    
+    const today = new Date().toISOString().split('T')[0];
+    const todayActivity = this.historyData[today];
+    
+    if (!todayActivity || !todayActivity.newStudies) return false;
+    
+    const noteId = card.noteId || card.note_id;
+    return todayActivity.newStudies.some(study => 
+      (study.note_id || study.noteId) === noteId
+    );
+  }
+
+  /**
+   * Check if card was studied for the first time this week
+   * @param {Object} card - Card data
+   * @returns {boolean} True if card is new this week
+   */
+  isCardNewThisWeek(card) {
+    if (!this.historyData) return false;
+    
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    const dayOfWeek = startOfWeek.getDay();
+    const diff = startOfWeek.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+    startOfWeek.setDate(diff);
+    startOfWeek.setHours(0, 0, 0, 0);
+    
+    const noteId = card.noteId || card.note_id;
+    
+    for (let date = new Date(startOfWeek); date <= today; date.setDate(date.getDate() + 1)) {
+      const dateStr = date.toISOString().split('T')[0];
+      const dayActivity = this.historyData[dateStr];
+      
+      if (dayActivity && dayActivity.newStudies) {
+        const found = dayActivity.newStudies.some(study => 
+          (study.note_id || study.noteId) === noteId
+        );
+        if (found) return true;
+      }
+    }
+    
+    return false;
+  }
+
+  /**
+   * Check if card was studied (reviewed) today
+   * @param {Object} card - Card data
+   * @returns {boolean} True if card was studied today
+   */
+  isCardStudiedToday(card) {
+    const today = new Date().toDateString();
+    const lastReview = card.lastReviewDate;
+    return lastReview && lastReview.toDateString() === today;
   }
 
   /**
@@ -469,6 +581,48 @@ class DataParser {
   }
 
   /**
+   * Get new words statistics from activity data
+   * @returns {Object} New words statistics
+   */
+  getNewWordsStats() {
+    if (!this.historyData) {
+      return {
+        newWordsToday: 0,
+        newWordsThisWeek: 0
+      };
+    }
+
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    
+    // Calculate start of this week (Monday)
+    const startOfWeek = new Date(today);
+    const dayOfWeek = startOfWeek.getDay();
+    const diff = startOfWeek.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+    startOfWeek.setDate(diff);
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    // Get today's new words
+    const todayActivity = this.historyData[todayStr];
+    const newWordsToday = todayActivity?.newStudies?.length || 0;
+
+    // Get this week's new words
+    let newWordsThisWeek = 0;
+    for (let date = new Date(startOfWeek); date <= today; date.setDate(date.getDate() + 1)) {
+      const dateStr = date.toISOString().split('T')[0];
+      const dayActivity = this.historyData[dateStr];
+      if (dayActivity?.newStudies) {
+        newWordsThisWeek += dayActivity.newStudies.length;
+      }
+    }
+
+    return {
+      newWordsToday,
+      newWordsThisWeek
+    };
+  }
+
+  /**
    * Get summary statistics
    * @param {Array} cards - Card data
    * @returns {Object} Summary statistics
@@ -480,7 +634,9 @@ class DataParser {
         studiedToday: 0,
         averageDaily: 0,
         longestStreak: 0,
-        currentStreak: 0
+        currentStreak: 0,
+        newWordsToday: 0,
+        newWordsThisWeek: 0
       };
     }
 
@@ -498,12 +654,16 @@ class DataParser {
       averageDaily = totalDays > 0 ? Math.round(totalActivity / totalDays) : 0;
     }
 
+    // Get new words statistics
+    const newWordsStats = this.getNewWordsStats();
+
     return {
       totalCards: cards.length,
       studiedToday,
       averageDaily,
       longestStreak: 0, // Would need more complex calculation
-      currentStreak: 0  // Would need more complex calculation
+      currentStreak: 0,  // Would need more complex calculation
+      ...newWordsStats
     };
   }
 }

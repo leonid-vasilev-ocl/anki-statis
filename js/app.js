@@ -5,11 +5,11 @@
 
 class AnkiStatsApp {
   constructor() {
-    // Initialize core components
-    this.stateManager = new StateManager();
-    this.i18n = new I18n();
-    this.dataParser = new DataParser();
-    this.chartsManager = new ChartsManager(this.stateManager, this.i18n, this.dataParser);
+    // Initialize core components using the global classes
+    this.stateManager = new window.StateManager();
+    this.i18n = new window.I18n();
+    this.dataParser = new window.DataParser();
+    this.chartsManager = new window.ChartsManager(this.stateManager, this.i18n, this.dataParser);
     
     // Application state
     this.isLoading = false;
@@ -28,15 +28,24 @@ class AnkiStatsApp {
       console.log('Initializing Anki Stats Dashboard...');
       
       // Check if required libraries are loaded
-      if (typeof Chart === 'undefined') {
+      if (typeof window.Chart === 'undefined') {
         throw new Error('Chart.js library not loaded');
       }
       
+      if (typeof window.DataTable === 'undefined') {
+        console.warn('DataTable library not loaded, table functionality may be limited');
+      }
+      
       // Apply saved theme immediately
-      this.applyTheme(this.stateManager.getState('theme'));
+      const savedTheme = this.stateManager.getState('theme');
+      console.log('Applying saved theme:', savedTheme);
+      this.applyTheme(savedTheme);
       
       // Set up internationalization
-      this.i18n.setLanguage(this.stateManager.getState('language'));
+      const savedLanguage = this.stateManager.getState('language');
+      console.log('Setting saved language:', savedLanguage);
+      this.i18n.setLanguage(savedLanguage);
+      this.i18n.updateUI();
       
       // Setup event listeners
       this.setupEventListeners();
@@ -79,25 +88,70 @@ class AnkiStatsApp {
     try {
       console.log('Loading data...');
       
-      // Load main CSV data
-      const csvResponse = await fetch('./anki_stats.csv');
-      if (!csvResponse.ok) {
-        throw new Error(`Failed to load CSV data: ${csvResponse.status}`);
+      // Load main CSV data (try multiple paths for dev/production compatibility)
+      let csvResponse;
+      let csvText;
+      
+      const csvPaths = [
+        '/anki_stats.csv',      // Production build path
+        './anki_stats.csv',     // Relative path fallback
+        'anki_stats.csv'        // Root fallback
+      ];
+      
+      for (const path of csvPaths) {
+        try {
+          console.log(`Trying to load CSV from: ${path}`);
+          csvResponse = await fetch(path);
+          if (csvResponse.ok) {
+            csvText = await csvResponse.text();
+            console.log(`Successfully loaded CSV from: ${path}`);
+            break;
+          }
+        } catch (pathError) {
+          console.log(`Failed to load CSV from ${path}:`, pathError.message);
+        }
       }
-      const csvText = await csvResponse.text();
+      
+      if (!csvText) {
+        throw new Error('Failed to load CSV data from any location');
+      }
       this.cardsData = this.dataParser.parseCSV(csvText);
       
       console.log(`Loaded ${this.cardsData.length} cards`);
       
       // Load activity log (optional)
       try {
-        const activityResponse = await fetch('./activity_log.json');
-        if (activityResponse.ok) {
-          const activityJson = await activityResponse.json();
-          this.activityData = this.dataParser.parseActivityLog(activityJson.daily_activity || {});
+        let activityResponse;
+        let activityJson;
+        
+        // Try multiple paths to ensure compatibility between dev and production
+        const activityPaths = [
+          '/activity_log.json',     // Production build path
+          './activity_log.json',    // Relative path fallback
+          'activity_log.json'       // Root fallback
+        ];
+        
+        for (const path of activityPaths) {
+          try {
+            console.log(`Trying to load activity log from: ${path}`);
+            activityResponse = await fetch(path);
+            if (activityResponse.ok) {
+              activityJson = await activityResponse.json();
+              console.log(`Successfully loaded activity log from: ${path}`);
+              break;
+            }
+          } catch (pathError) {
+            console.log(`Failed to load from ${path}:`, pathError.message);
+          }
+        }
+        
+        if (activityJson) {
+          // Handle both nested and flat structures
+          const dailyActivity = activityJson.daily_activity || activityJson;
+          this.activityData = this.dataParser.parseActivityLog(dailyActivity);
           console.log(`Loaded activity data for ${Object.keys(this.activityData).length} days`);
         } else {
-          console.warn('Activity log not found, using empty data');
+          console.warn('Activity log not found in any location, using empty data');
           this.activityData = {};
         }
       } catch (error) {
@@ -141,49 +195,120 @@ class AnkiStatsApp {
    * Initialize interactive card table
    */
   initializeCardTable() {
-    const tableBody = document.querySelector('#cardTable tbody');
-    if (!tableBody) return;
+    const table = document.getElementById('cardTable');
+    if (!table) return;
     
-    this.updateCardTable();
+    // Destroy existing DataTable if it exists
+    if (this.dataTable) {
+      this.dataTable.destroy();
+    }
+    
+    // Initialize DataTable
+    this.initializeDataTable();
+  }
+  
+  /**
+   * Initialize DataTable with all features
+   */
+  initializeDataTable() {
+    const filters = this.stateManager.getState('filters');
+    const filteredCards = this.dataParser.filterCards(this.cardsData, filters);
+    
+    // Prepare data for DataTable
+    const tableData = filteredCards.map(card => [
+      this.escapeHtml(card.finnish || ''),
+      this.escapeHtml(card.translation || ''),
+      `<span class="level-badge level-${(card.ankiLevel || '').toLowerCase().replace(/\s+/g, '-')}">${this.i18n.t(`levels.${card.ankiLevel}`) || card.ankiLevel}</span>`,
+      this.escapeHtml(card.deckName || ''),
+      card.lastReviewDate ? this.i18n.formatDate(card.lastReviewDate) : '-'
+    ]);
+    
+    // Get current language for DataTable localization
+    const currentLang = this.i18n.getCurrentLanguage();
+    
+    // DataTable configuration
+    const config = {
+      data: tableData,
+      responsive: true,
+      pageLength: 25,
+      lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, this.i18n.t('pagination.all')]],
+      language: {
+        search: this.i18n.t('pagination.search'),
+        lengthMenu: this.i18n.t('pagination.lengthMenu'),
+        info: this.i18n.t('pagination.info'),
+        infoEmpty: this.i18n.t('pagination.infoEmpty'),
+        infoFiltered: this.i18n.t('pagination.infoFiltered'),
+        emptyTable: this.i18n.t('pagination.emptyTable'),
+        paginate: {
+          first: this.i18n.t('pagination.first'),
+          previous: this.i18n.t('pagination.previous'),
+          next: this.i18n.t('pagination.next'),
+          last: this.i18n.t('pagination.last')
+        }
+      },
+      order: [[4, 'desc']], // Sort by last review date descending
+      columnDefs: [
+        { 
+          targets: [2], // Level column
+          orderable: true,
+          render: function(data, type, row) {
+            if (type === 'sort') {
+              // Extract text content for sorting
+              const tempDiv = document.createElement('div');
+              tempDiv.innerHTML = data;
+              return tempDiv.textContent || tempDiv.innerText || '';
+            }
+            return data;
+          }
+        }
+      ],
+      drawCallback: () => {
+        // Update card count after each draw
+        this.updateCardCount();
+      }
+    };
+    
+    // Initialize DataTable
+    this.dataTable = new window.DataTable('#cardTable', config);
   }
   
   /**
    * Update card table with current data and filters
    */
   updateCardTable() {
-    const tableBody = document.querySelector('#cardTable tbody');
-    const cardCount = document.getElementById('cardCount');
-    if (!tableBody) return;
-    
-    const filters = this.stateManager.getState('filters');
-    const tableState = this.stateManager.getState('tableStates');
-    const filteredCards = this.dataParser.filterCards(this.cardsData, filters);
-    
-    // Sort cards
-    const sortedCards = this.sortCards(filteredCards, tableState.sortColumn, tableState.sortOrder);
-    
-    // Paginate cards
-    const startIndex = (tableState.currentPage - 1) * tableState.pageSize;
-    const endIndex = startIndex + tableState.pageSize;
-    const paginatedCards = sortedCards.slice(startIndex, endIndex);
-    
-    // Clear existing rows
-    tableBody.innerHTML = '';
-    
-    // Add rows
-    paginatedCards.forEach(card => {
-      const row = this.createTableRow(card);
-      tableBody.appendChild(row);
-    });
-    
-    // Update card count
-    if (cardCount) {
-      const countText = this.i18n.formatNumber(filteredCards.length) + ' ' + this.i18n.t('stats.cards');
-      cardCount.textContent = countText;
+    if (!this.dataTable) {
+      this.initializeDataTable();
+      return;
     }
     
-    // Update pagination (if implemented)
-    this.updateTablePagination(filteredCards.length, tableState);
+    const filters = this.stateManager.getState('filters');
+    const filteredCards = this.dataParser.filterCards(this.cardsData, filters);
+    
+    // Prepare new data
+    const tableData = filteredCards.map(card => [
+      this.escapeHtml(card.finnish || ''),
+      this.escapeHtml(card.translation || ''),
+      `<span class="level-badge level-${(card.ankiLevel || '').toLowerCase().replace(/\s+/g, '-')}">${this.i18n.t(`levels.${card.ankiLevel}`) || card.ankiLevel}</span>`,
+      this.escapeHtml(card.deckName || ''),
+      card.lastReviewDate ? this.i18n.formatDate(card.lastReviewDate) : '-'
+    ]);
+    
+    // Clear and reload data
+    this.dataTable.clear();
+    this.dataTable.rows.add(tableData);
+    this.dataTable.draw();
+  }
+  
+  /**
+   * Update card count display
+   */
+  updateCardCount() {
+    const cardCount = document.getElementById('cardCount');
+    if (cardCount && this.dataTable) {
+      const info = this.dataTable.page.info();
+      const countText = this.i18n.formatNumber(info.recordsDisplay) + ' ' + this.i18n.t('stats.cards');
+      cardCount.textContent = countText;
+    }
   }
   
   /**
@@ -360,6 +485,8 @@ class AnkiStatsApp {
     this.updateStatsElement('totalCards', stats.totalCards);
     this.updateStatsElement('studiedToday', stats.studiedToday);
     this.updateStatsElement('averageDaily', stats.averageDaily);
+    this.updateStatsElement('newWordsToday', stats.newWordsToday);
+    this.updateStatsElement('newWordsThisWeek', stats.newWordsThisWeek);
   }
   
   /**
@@ -438,8 +565,77 @@ class AnkiStatsApp {
         this.chartsManager.updateHeatmapYear(parseInt(e.target.value));
       });
     }
+
+    // Stat card click handlers
+    const statCards = document.querySelectorAll('.stat-card.clickable');
+    statCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        const filterType = e.currentTarget.getAttribute('data-filter');
+        this.toggleStatFilter(filterType, card);
+      });
+    });
   }
   
+  /**
+   * Toggle stat-based filter
+   * @param {string} filterType - Type of stat filter
+   * @param {HTMLElement} cardElement - The clicked stat card
+   */
+  toggleStatFilter(filterType, cardElement) {
+    console.log('Toggling stat filter:', filterType);
+    
+    const currentFilters = this.stateManager.getState('filters');
+    const currentStatFilter = currentFilters.statFilter;
+    
+    // Toggle the filter
+    if (currentStatFilter && currentStatFilter.type === filterType) {
+      // Remove filter if clicking the same card
+      this.stateManager.updateFilters({ statFilter: null });
+      this.updateStatCardVisualState(null);
+    } else {
+      // Set new filter
+      this.stateManager.updateFilters({ 
+        statFilter: { type: filterType, active: true }
+      });
+      this.updateStatCardVisualState(filterType);
+    }
+    
+    // Update UI
+    this.updateChartsAndTable();
+  }
+
+  /**
+   * Update visual state of stat cards
+   * @param {string|null} activeFilterType - Currently active filter type
+   */
+  updateStatCardVisualState(activeFilterType) {
+    const statCards = document.querySelectorAll('.stat-card.clickable');
+    statCards.forEach(card => {
+      const filterType = card.getAttribute('data-filter');
+      if (filterType === activeFilterType) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  /**
+   * Update charts and table with current filters
+   */
+  updateChartsAndTable() {
+    // Update stats summary
+    this.updateSummaryStats();
+    
+    // Update card table
+    this.updateCardTable();
+    
+    // Update charts
+    if (this.chartsManager) {
+      this.chartsManager.updateChartsData();
+    }
+  }
+
   /**
    * Setup state change subscriptions
    */
@@ -453,7 +649,7 @@ class AnkiStatsApp {
     // Subscribe to language changes
     this.stateManager.subscribe('languageChange', () => {
       this.updateFilterOptions();
-      this.updateCardTable();
+      this.initializeCardTable(); // Reinitialize table with new language
     });
     
     // Subscribe to theme changes
@@ -508,8 +704,11 @@ class AnkiStatsApp {
    */
   updateLanguageButtons() {
     const currentLang = this.stateManager.getState('language');
+    console.log('Updating language buttons, current lang:', currentLang);
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      const isActive = btn.dataset.lang === currentLang;
+      btn.classList.toggle('active', isActive);
+      console.log(`Button ${btn.dataset.lang} active:`, isActive);
     });
   }
   
@@ -518,16 +717,27 @@ class AnkiStatsApp {
    * @param {string} lang - Language code
    */
   changeLanguage(lang) {
+    console.log('Changing language to:', lang);
     this.i18n.setLanguage(lang);
     this.stateManager.setLanguage(lang);
+    this.i18n.updateUI();
     this.updateLanguageButtons();
+    
+    // Reinitialize components that need translation updates
+    if (this.cardsData && this.activityData) {
+      this.initializeCardTable();
+      this.chartsManager.updateChartsLanguage();
+    }
   }
   
   /**
    * Toggle application theme
    */
   toggleTheme() {
-    this.stateManager.toggleTheme();
+    console.log('Toggling theme');
+    const newTheme = this.stateManager.toggleTheme();
+    console.log('New theme:', newTheme);
+    this.applyTheme(newTheme);
   }
   
   /**
@@ -584,6 +794,9 @@ class AnkiStatsApp {
     if (deckFilter) deckFilter.value = '';
     if (levelFilter) levelFilter.value = '';
     if (searchFilter) searchFilter.value = '';
+    
+    // Clear stat card visual states
+    this.updateStatCardVisualState(null);
   }
   
   /**

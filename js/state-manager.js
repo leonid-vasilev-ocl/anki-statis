@@ -21,7 +21,8 @@ const defaultState = {
     dateRange: {
       start: null, // Date string or null
       end: null // Date string or null
-    }
+    },
+    statFilter: null // Stat-based filter { type: 'newWordsToday' | 'newWordsThisWeek' | 'studiedToday' | 'totalCards', active: boolean }
   },
   
   // Chart-specific states
@@ -84,8 +85,38 @@ class StateManager {
       if (savedState) {
         const parsed = JSON.parse(savedState);
         // Merge with defaults to handle new state properties
-        return this.deepMerge(defaultState, parsed);
+        const mergedState = this.deepMerge(defaultState, parsed);
+        
+        // Load individual settings from legacy keys for backwards compatibility
+        const savedTheme = localStorage.getItem('ankiStats_theme') || localStorage.getItem('anki-stats-theme');
+        const savedLanguage = localStorage.getItem('ankiStats_language') || localStorage.getItem('anki-stats-language');
+        
+        if (savedTheme && ['dark', 'light'].includes(savedTheme)) {
+          mergedState.theme = savedTheme;
+        }
+        
+        if (savedLanguage && ['en', 'ru'].includes(savedLanguage)) {
+          mergedState.language = savedLanguage;
+        }
+        
+        return mergedState;
       }
+      
+      // If no saved state, check for legacy individual settings
+      const legacyState = { ...defaultState };
+      const savedTheme = localStorage.getItem('ankiStats_theme') || localStorage.getItem('anki-stats-theme');
+      const savedLanguage = localStorage.getItem('ankiStats_language') || localStorage.getItem('anki-stats-language');
+      
+      if (savedTheme && ['dark', 'light'].includes(savedTheme)) {
+        legacyState.theme = savedTheme;
+      }
+      
+      if (savedLanguage && ['en', 'ru'].includes(savedLanguage)) {
+        legacyState.language = savedLanguage;
+      }
+      
+      return legacyState;
+      
     } catch (error) {
       console.warn('Failed to load state from localStorage:', error);
     }
@@ -99,8 +130,24 @@ class StateManager {
   saveState() {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.state));
+      
+      // Also save individual settings for backwards compatibility and quick access
+      localStorage.setItem('ankiStats_theme', this.state.theme);
+      localStorage.setItem('ankiStats_language', this.state.language);
+      
+      // Clean up old storage keys
+      localStorage.removeItem('anki-stats-theme');
+      localStorage.removeItem('anki-stats-language');
+      
     } catch (error) {
       console.error('Failed to save state to localStorage:', error);
+      // Try to save at least the critical settings individually
+      try {
+        localStorage.setItem('ankiStats_theme', this.state.theme);
+        localStorage.setItem('ankiStats_language', this.state.language);
+      } catch (fallbackError) {
+        console.error('Failed to save even basic settings:', fallbackError);
+      }
     }
   }
   
@@ -403,7 +450,8 @@ class StateManager {
       selectedDecks: [],
       selectedLevels: [],
       searchQuery: '',
-      dateRange: { start: null, end: null }
+      dateRange: { start: null, end: null },
+      statFilter: null
     });
   }
   

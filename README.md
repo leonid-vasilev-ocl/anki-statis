@@ -1,14 +1,19 @@
 # Anki Statistics Dashboard
 
-A modern, interactive web dashboard for visualizing your Anki learning statistics with Russian/English internationalization, dark/light themes, and persistent user preferences.
+A modern, interactive web dashboard for visualizing your Anki learning statistics with Russian/English internationalization, dark/light themes, clickable stat counters, and comprehensive study activity tracking.
 
 ## Features
 
-### 📊 Interactive Charts
+### 📊 Interactive Charts & Statistics
 - **Level Distribution Pie Chart** - See breakdown of card levels (New, Learning, Young, Mature, etc.)
 - **Deck Performance Bar Chart** - Compare performance across different decks
 - **Study Timeline** - Track your study activity over time (week/month/year view)
 - **Activity Heatmap** - Calendar-style visualization of daily study intensity
+- **Clickable Stat Counters** - Click statistics to filter data instantly:
+  - "New Words Today" → Filter cards studied for first time today
+  - "New Words This Week" → Filter cards studied for first time this week
+  - "Studied Today" → Filter cards reviewed today
+  - "Total Cards" → Clear all stat-based filters
 
 ### 🌐 Internationalization
 - **Bilingual Support** - Full English and Russian translations
@@ -18,7 +23,8 @@ A modern, interactive web dashboard for visualizing your Anki learning statistic
 ### 🎨 Modern Design
 - **Dark/Light Themes** - Beautiful themes with smooth transitions
 - **Responsive Design** - Works perfectly on desktop, tablet, and mobile
-- **Interactive Filtering** - Click charts to filter data, search cards, select decks/levels
+- **Interactive Filtering** - Click charts and counters to filter data, search cards, select decks/levels
+- **Visual Feedback** - Hover effects and active states for interactive elements
 - **Persistent State** - All preferences and filters saved in localStorage
 
 ### 📈 Data Management
@@ -26,6 +32,7 @@ A modern, interactive web dashboard for visualizing your Anki learning statistic
 - **Smart Change Detection** - Tracks new reviews, studies, and level changes
 - **CSV Export Integration** - Works with your existing Anki export script
 - **Automatic Backups** - Keeps backups of previous data
+- **Production-Ready** - Consistent behavior between development and production builds
 
 ## Quick Start
 
@@ -64,6 +71,10 @@ python3 "/path/to/your/export_anki_notes.py" test_export.csv
 
 # Build for production
 npm run build
+
+# IMPORTANT: Test production build before deployment
+npm run preview
+# Opens at http://localhost:4173 - verify everything works consistently
 
 # Run initial deployment
 ./deploy_manual.sh
@@ -134,17 +145,22 @@ anki-stats/
 
 ## Dashboard Features
 
-### Interactive Charts
+### Interactive Charts & Counters
 - **Click pie chart segments** to filter by card level
 - **Click deck bars** to filter by deck
 - **Click heatmap cells** to filter by date
+- **Click stat counters** to filter by study activity:
+  - New Words Today/Week → Show only recently studied cards
+  - Studied Today → Show only cards reviewed today
+  - Total Cards → Clear stat-based filters
 - **Cross-chart filtering** - all visualizations update together
 
-### Filters & Search
+### Advanced Filtering & Search
 - **Deck Filter** - Select specific decks to analyze
 - **Level Filter** - Focus on specific card learning levels
 - **Text Search** - Find cards by Finnish or Russian text
 - **Date Range** - Filter by study/review dates
+- **Stat-based Filters** - Filter by study activity patterns
 - **Clear Filters** - Reset all filters instantly
 
 ### User Preferences
@@ -224,11 +240,45 @@ anki-stats/
 - Verify CSV data format matches expected structure
 - Ensure Chart.js library loads correctly
 
+**"Different behavior between dev and preview"**
+- Always test both `npm run dev` and `npm run preview` before deployment
+- Check console for file loading errors in preview mode
+- Verify data counters and visualizations match between environments
+
 ### Debug Information
 Open browser console and run:
 ```javascript
-app.getDebugInfo()  // Get application status
+app.getDebugInfo()                  // Get application status
+stateManager.getDebugInfo()         // State management info
+dataParser.rawData.length           // Verify data loading
+dataParser.getNewWordsStats()       // Check new words counters
 ```
+
+### Production vs Development Testing
+Always verify consistency between environments:
+```bash
+# Test development
+npm run dev
+# → Visit http://localhost:3000, note data counts and functionality
+
+# Test production build
+npm run build && npm run preview  
+# → Visit http://localhost:4173, verify identical behavior
+```
+
+## Recent Improvements
+
+### ✨ New Features (Latest Update)
+- **Clickable Stat Counters** - Interactive filtering via statistics cards
+- **Enhanced Visual Feedback** - Hover effects and active states for all interactive elements
+- **Production Consistency** - Fixed differences between development and production builds
+- **Improved Error Handling** - Better fallback behavior and debugging information
+
+### 🔧 Technical Improvements
+- **Multi-path Asset Loading** - Robust file loading with fallback paths
+- **Data Validation** - Comprehensive field validation with sensible defaults
+- **Build Optimization** - Improved Vite configuration for consistent asset handling
+- **Debug Enhancement** - Extended logging and debugging capabilities
 
 ## Requirements
 
@@ -237,6 +287,7 @@ app.getDebugInfo()  // Get application status
 - **Git** - For version control and deployment
 - **GitHub Account** - For hosting via GitHub Pages
 - **Anki Desktop** - Source of study data
+- **Node.js 16+** - For building and running the frontend
 
 ## Contributing
 

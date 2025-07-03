@@ -32,12 +32,9 @@ class ChartsManager {
       this.cardsData = cardsData;
       this.activityData = activityData;
       
-      // Set activity data in data parser for heatmap
-      if (activityData) {
-        // Extract daily_activity from the nested structure
-        const dailyActivityData = activityData.daily_activity || activityData;
-        this.dataParser.parseActivityLog(dailyActivityData);
-      }
+      // Activity data is already parsed and available in dataParser.historyData
+      // No need to call parseActivityLog again as it was already called in app.js
+      console.log('Charts using already parsed activity data from dataParser.historyData');
       
       // Create charts in order
       console.log('Creating level distribution chart...');
@@ -154,7 +151,7 @@ class ChartsManager {
     console.log('Chart.js available:', typeof Chart !== 'undefined');
     console.log('Config:', config);
     
-    const chart = new Chart(ctx, config);
+    const chart = new window.Chart(ctx, config);
     console.log('Chart created successfully:', chart);
     
     this.charts.set('levelChart', chart);
@@ -262,7 +259,7 @@ class ChartsManager {
       this.charts.get('deckChart').destroy();
     }
     
-    const chart = new Chart(ctx, config);
+    const chart = new window.Chart(ctx, config);
     this.charts.set('deckChart', chart);
     this.chartConfigs.set('deckChart', config);
   }
@@ -276,7 +273,8 @@ class ChartsManager {
     
     const ctx = canvas.getContext('2d');
     const timeframe = this.stateManager.getState('chartStates.timelineZoom');
-    const timelineData = this.dataParser.getTimelineData(timeframe);
+    const locale = this.i18n.getCurrentLanguage() === 'ru' ? 'ru-RU' : 'en-US';
+    const timelineData = this.dataParser.getTimelineData(timeframe, locale);
     
     const config = {
       type: 'line',
@@ -341,11 +339,18 @@ class ChartsManager {
       }
     };
     
-    // Update dataset colors to match theme
+    // Update dataset colors and labels to match theme and language
     config.data.datasets.forEach((dataset, index) => {
       const colors = ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0'];
       dataset.borderColor = colors[index % colors.length];
       dataset.backgroundColor = colors[index % colors.length] + '20'; // Add transparency
+      
+      // Update dataset labels with translations
+      if (dataset.label === 'Reviews') {
+        dataset.label = this.i18n.t('timeline.reviews');
+      } else if (dataset.label === 'New Cards') {
+        dataset.label = this.i18n.t('timeline.newCards');
+      }
     });
     
     // Destroy existing chart if it exists
@@ -353,7 +358,7 @@ class ChartsManager {
       this.charts.get('timelineChart').destroy();
     }
     
-    const chart = new Chart(ctx, config);
+    const chart = new window.Chart(ctx, config);
     this.charts.set('timelineChart', chart);
     this.chartConfigs.set('timelineChart', config);
   }

@@ -74,8 +74,11 @@ const translations = {
       averageDaily: "Daily Average",
       longestStreak: "Longest Streak",
       currentStreak: "Current Streak",
+      newWordsToday: "New Words Today",
+      newWordsThisWeek: "New Words This Week",
       cards: "cards",
-      days: "days"
+      days: "days",
+      words: "words"
     },
     
     // Messages
@@ -86,6 +89,26 @@ const translations = {
       noResults: "No cards match your filters",
       cardDetails: "Card Details",
       exportData: "Export Data"
+    },
+    
+    // Pagination
+    pagination: {
+      first: "First",
+      previous: "Previous",
+      next: "Next",
+      last: "Last",
+      page: "Page",
+      of: "of",
+      showing: "Showing",
+      to: "to",
+      entries: "entries",
+      search: "Search:",
+      lengthMenu: "Show _MENU_ entries",
+      info: "Showing _START_ to _END_ of _TOTAL_ entries",
+      infoEmpty: "Showing 0 to 0 of 0 entries",
+      infoFiltered: "(filtered from _MAX_ total entries)",
+      emptyTable: "No data available in table",
+      all: "All"
     },
     
     // Tooltips
@@ -178,8 +201,11 @@ const translations = {
       averageDaily: "Среднее в день",
       longestStreak: "Самая длинная серия",
       currentStreak: "Текущая серия",
+      newWordsToday: "Новых слов сегодня",
+      newWordsThisWeek: "Новых слов на этой неделе",
       cards: "карт",
-      days: "дней"
+      days: "дней",
+      words: "слов"
     },
     
     // Messages
@@ -190,6 +216,26 @@ const translations = {
       noResults: "Карты не найдены по вашим фильтрам",
       cardDetails: "Детали карты",
       exportData: "Экспорт данных"
+    },
+    
+    // Pagination
+    pagination: {
+      first: "Первая",
+      previous: "Предыдущая",
+      next: "Следующая",
+      last: "Последняя",
+      page: "Страница",
+      of: "из",
+      showing: "Показано",
+      to: "до",
+      entries: "записей",
+      search: "Поиск:",
+      lengthMenu: "Показать _MENU_ записей",
+      info: "Показано с _START_ по _END_ из _TOTAL_ записей",
+      infoEmpty: "Показано с 0 по 0 из 0 записей",
+      infoFiltered: "(отфильтровано из _MAX_ записей)",
+      emptyTable: "В таблице нет данных",
+      all: "Все"
     },
     
     // Tooltips
@@ -410,3 +456,6 @@ class I18n {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { I18n, translations };
 }
+
+// ES6 module export
+export { I18n, translations };

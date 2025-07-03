@@ -38,6 +38,32 @@
                 </div>
             </section>
 
+            <!-- Stats Summary Section -->
+            <section class="stats-summary">
+                <div class="stats-grid">
+                    <div class="stat-card clickable" id="newWordsTodayCard" data-filter="newWordsToday">
+                        <h3 data-i18n="stats.newWordsToday">New Words Today</h3>
+                        <div class="stat-value" id="newWordsToday">0</div>
+                        <span class="stat-unit" data-i18n="stats.words">words</span>
+                    </div>
+                    <div class="stat-card clickable" id="newWordsThisWeekCard" data-filter="newWordsThisWeek">
+                        <h3 data-i18n="stats.newWordsThisWeek">New Words This Week</h3>
+                        <div class="stat-value" id="newWordsThisWeek">0</div>
+                        <span class="stat-unit" data-i18n="stats.words">words</span>
+                    </div>
+                    <div class="stat-card clickable" id="totalCardsCard" data-filter="totalCards">
+                        <h3 data-i18n="stats.totalCards">Total Cards</h3>
+                        <div class="stat-value" id="totalCards">0</div>
+                        <span class="stat-unit" data-i18n="stats.cards">cards</span>
+                    </div>
+                    <div class="stat-card clickable" id="studiedTodayCard" data-filter="studiedToday">
+                        <h3 data-i18n="stats.studiedToday">Studied Today</h3>
+                        <div class="stat-value" id="studiedToday">0</div>
+                        <span class="stat-unit" data-i18n="stats.cards">cards</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- Charts Grid -->
             <div class="charts-grid">
                 <!-- Level Distribution Chart -->
@@ -102,7 +128,7 @@
                         </div>
                     </div>
                     <div class="table-container">
-                        <table id="cardTable" class="card-table">
+                        <table id="cardTable" class="card-table display responsive nowrap" style="width:100%">
                             <thead>
                                 <tr>
                                     <th data-i18n="table.finnish">Finnish</th>
