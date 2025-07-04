@@ -1,7 +1,7 @@
 {
   "metadata": {
     "created": "2025-06-16T10:00:00.000Z",
-    "last_updated": "2025-07-04T09:33:35.036631",
+    "last_updated": "2025-07-04T20:09:46.585486",
     "total_days_tracked": 18,
     "version": "1.0"
   },
@@ -942,6 +942,14 @@
           "finnish": "keikka",
           "translation": "музыкальное представление, выступление, концерт",
           "timestamp": "2025-06-22 21:07:17"
+        },
+        {
+          "note_id": "1447962361790",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "säkki",
+          "translation": "мешок",
+          "timestamp": "2025-06-22 21:08:35"
         }
       ],
       "new_studies": [
@@ -1116,7 +1124,7 @@
       ],
       "level_changes": [],
       "stats": {
-        "total_reviews": 3,
+        "total_reviews": 4,
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
@@ -1126,7 +1134,16 @@
       }
     },
     "2025-06-23": {
-      "reviews": [],
+      "reviews": [
+        {
+          "note_id": "1699280961385",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "tarrautua",
+          "translation": "to grip tightly/ to cling",
+          "timestamp": "2025-06-23 09:53:04"
+        }
+      ],
       "new_studies": [
         {
           "note_id": "1649593536436",
@@ -1211,11 +1228,12 @@
       ],
       "level_changes": [],
       "stats": {
-        "total_reviews": 0,
+        "total_reviews": 1,
         "total_new_studies": 10,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Words"
         ]
       }
     },
@@ -1414,8 +1432,8 @@
         "total_new_studies": 22,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
           "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet",
           "Finnish::Words"
         ]
       }
@@ -1735,8 +1753,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -3321,6 +3339,38 @@
           "finnish": "kaulaliina",
           "translation": "kaulaliina",
           "timestamp": "2025-07-04 09:00:23"
+        },
+        {
+          "note_id": "1442134792329",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Learning",
+          "finnish": "vintti",
+          "translation": "чердак",
+          "timestamp": "2025-07-04 17:02:55"
+        },
+        {
+          "note_id": "1491113229620",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Learning",
+          "finnish": "aikakauslehti",
+          "translation": "периодика, журнал",
+          "timestamp": "2025-07-04 17:03:49"
+        },
+        {
+          "note_id": "1697110828982",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Relearning",
+          "finnish": "työpaikkailmoitus",
+          "translation": "объявление о вакансии",
+          "timestamp": "2025-07-04 17:06:08"
+        },
+        {
+          "note_id": "1698325937198",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Learning",
+          "finnish": "heiketä",
+          "translation": "слабеть, ослабевать",
+          "timestamp": "2025-07-04 17:05:18"
         }
       ],
       "new_studies": [
@@ -3510,15 +3560,123 @@
           "previous_level": "Learning",
           "new_level": "Young",
           "timestamp": "2025-07-04T09:33:35.036593"
+        },
+        {
+          "note_id": "1418471664190",
+          "deck_name": "Finnish::Words",
+          "finnish": "tölkki",
+          "translation": "банка, консервная банка",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585409"
+        },
+        {
+          "note_id": "1428053031967",
+          "deck_name": "Finnish::Words",
+          "finnish": "penkoa",
+          "translation": "рыться, искать, разузнавать, обыскивать",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585414"
+        },
+        {
+          "note_id": "1433268896639",
+          "deck_name": "Finnish::Words",
+          "finnish": "upota",
+          "translation": "тонуть",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585418"
+        },
+        {
+          "note_id": "1447962361790",
+          "deck_name": "Finnish::Words",
+          "finnish": "säkki",
+          "translation": "мешок",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585422"
+        },
+        {
+          "note_id": "1491154609894",
+          "deck_name": "Finnish::Words",
+          "finnish": "avustaminen",
+          "translation": "помощь, вклад",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585425"
+        },
+        {
+          "note_id": "1697110722770",
+          "deck_name": "Finnish::Words",
+          "finnish": "koulutehtävä",
+          "translation": "школьное задание",
+          "previous_level": "Relearning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585428"
+        },
+        {
+          "note_id": "1697110828982",
+          "deck_name": "Finnish::Words",
+          "finnish": "työpaikkailmoitus",
+          "translation": "объявление о вакансии",
+          "previous_level": "Young",
+          "new_level": "Relearning",
+          "timestamp": "2025-07-04T20:09:46.585432"
+        },
+        {
+          "note_id": "1697110927847",
+          "deck_name": "Finnish::Words",
+          "finnish": "suhtautuminen",
+          "translation": "отношение",
+          "previous_level": "Learning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585435"
+        },
+        {
+          "note_id": "1697111027569",
+          "deck_name": "Finnish::Words",
+          "finnish": "liitutaulu",
+          "translation": "доска для мела",
+          "previous_level": "Learning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585438"
+        },
+        {
+          "note_id": "1697111076849",
+          "deck_name": "Finnish::Words",
+          "finnish": "haittavaikutus",
+          "translation": "побочный эффект",
+          "previous_level": "Learning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585442"
+        },
+        {
+          "note_id": "1697111100301",
+          "deck_name": "Finnish::Words",
+          "finnish": "koulunkäyntiaste",
+          "translation": "уровень образования",
+          "previous_level": "Learning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585445"
+        },
+        {
+          "note_id": "1699280961385",
+          "deck_name": "Finnish::Words",
+          "finnish": "tarrautua",
+          "translation": "to grip tightly/ to cling",
+          "previous_level": "Learning",
+          "new_level": "Young",
+          "timestamp": "2025-07-04T20:09:46.585448"
         }
       ],
       "stats": {
-        "total_reviews": 47,
+        "total_reviews": 51,
         "total_new_studies": 13,
-        "total_level_changes": 9,
+        "total_level_changes": 21,
         "decks_studied": [
-          "Finnish::Vaatteet",
           "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet",
           "Finnish::Words"
         ]
       }
