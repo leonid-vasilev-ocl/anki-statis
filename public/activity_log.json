@@ -1,8 +1,8 @@
 {
   "metadata": {
     "created": "2025-06-16T10:00:00.000Z",
-    "last_updated": "2025-07-03T09:41:53.456258",
-    "total_days_tracked": 17,
+    "last_updated": "2025-07-05T12:49:23.846198",
+    "total_days_tracked": 19,
     "version": "1.0"
   },
   "daily_activity": {
@@ -129,9 +129,9 @@
         "total_new_studies": 12,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Phrases",
           "Finnish::Grammar",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Phrases"
         ]
       }
     },
@@ -354,8 +354,8 @@
         "total_new_studies": 18,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Phrases",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Phrases"
         ]
       }
     },
@@ -530,8 +530,8 @@
         "total_new_studies": 19,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -714,8 +714,8 @@
         "total_new_studies": 20,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -912,8 +912,8 @@
         "total_new_studies": 10,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1120,8 +1120,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1414,9 +1414,9 @@
         "total_new_studies": 22,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
+          "Finnish::Words",
           "Finnish::Vaatteet",
-          "Finnish::Words"
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1552,8 +1552,8 @@
         "total_level_changes": 0,
         "decks_studied": [
           "Finnish::Suomen Mestari 1",
-          "Finnish::Phrases",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Phrases"
         ]
       }
     },
@@ -1735,8 +1735,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Vaatteet"
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -2930,8 +2930,921 @@
         "total_new_studies": 16,
         "total_level_changes": 17,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
+        ]
+      }
+    },
+    "2025-07-05": {
+      "reviews": [
+        {
+          "note_id": "1418471664190",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "tölkki",
+          "translation": "банка, консервная банка",
+          "timestamp": null
+        },
+        {
+          "note_id": "1436380042994",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "puskuri",
+          "translation": "бампер",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536484",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "itä",
+          "translation": "восток",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536485",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Pohjois-Amerikka",
+          "translation": "Северная Америка",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536486",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Etelä-Amerikka",
+          "translation": "Южная Америка",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536487",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Afrikka",
+          "translation": "Африка",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536488",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Eurooppa",
+          "translation": "Европа",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536490",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Australia",
+          "translation": "Австралия",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536491",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Pohjoisnapa",
+          "translation": "северный полюс",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536507",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "kysyä",
+          "translation": "спрашивать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536508",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "kuka",
+          "translation": "кто",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536513",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "mihin",
+          "translation": "куда",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110704812",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "omakotitaloalue",
+          "translation": "район частных домов",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111055019",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "vesijohto",
+          "translation": "водопровод",
+          "timestamp": null
+        },
+        {
+          "note_id": "1750772178486",
+          "deck_name": "Finnish::Vaatteet",
+          "anki_level": "Young",
+          "finnish": "lenkkarit",
+          "translation": "lenkkarit",
+          "timestamp": null
+        },
+        {
+          "note_id": "1750772294850",
+          "deck_name": "Finnish::Vaatteet",
+          "anki_level": "Young",
+          "finnish": "käsineet",
+          "translation": "käsineet",
+          "timestamp": null
+        },
+        {
+          "note_id": "1750772327002",
+          "deck_name": "Finnish::Vaatteet",
+          "anki_level": "Young",
+          "finnish": "kaulaliina",
+          "translation": "kaulaliina",
+          "timestamp": null
+        },
+        {
+          "note_id": "1413471996727",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "humalainen",
+          "translation": "пьяный",
+          "timestamp": null
+        },
+        {
+          "note_id": "1416162861920",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "reisi",
+          "translation": "бедро",
+          "timestamp": null
+        },
+        {
+          "note_id": "1419178041871",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "päättää",
+          "translation": "решать, решить",
+          "timestamp": null
+        },
+        {
+          "note_id": "1424205804573",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "tuhota",
+          "translation": "разгромить",
+          "timestamp": null
+        },
+        {
+          "note_id": "1424206536668",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "haastaa",
+          "translation": "бросать вызов",
+          "timestamp": null
+        },
+        {
+          "note_id": "1428053031967",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "penkoa",
+          "translation": "рыться, искать, разузнавать, обыскивать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1428728703215",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "muoto",
+          "translation": "форма, вид, состояние",
+          "timestamp": null
+        },
+        {
+          "note_id": "1433268896639",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "upota",
+          "translation": "тонуть",
+          "timestamp": null
+        },
+        {
+          "note_id": "1436706106406",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "sivuuttaa",
+          "translation": "пренебрегать, игнорировать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1441132596134",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "ulkoiluttaa",
+          "translation": "выгуливать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1442134792329",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "vintti",
+          "translation": "чердак",
+          "timestamp": null
+        },
+        {
+          "note_id": "1445765611707",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "noutaa",
+          "translation": "забрать, принести",
+          "timestamp": null
+        },
+        {
+          "note_id": "1447620265602",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "huokea",
+          "translation": "дешевый, недорогой, доступный (inexpensive)",
+          "timestamp": null
+        },
+        {
+          "note_id": "1447962361790",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "säkki",
+          "translation": "мешок",
+          "timestamp": null
+        },
+        {
+          "note_id": "1451939143543",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "edustaa",
+          "translation": "представлять",
+          "timestamp": null
+        },
+        {
+          "note_id": "1452800642336",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "heilua",
+          "translation": "трястись, шататься, качаться",
+          "timestamp": null
+        },
+        {
+          "note_id": "1453670714463",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "kyyti",
+          "translation": "подвоз",
+          "timestamp": null
+        },
+        {
+          "note_id": "1454761860102",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "kielteinen",
+          "translation": "отрицательный, негативный",
+          "timestamp": null
+        },
+        {
+          "note_id": "1472494309096",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "viiru",
+          "translation": "царапина, полоска",
+          "timestamp": null
+        },
+        {
+          "note_id": "1479647529200",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "lantio",
+          "translation": "таз (часть тела)",
+          "timestamp": null
+        },
+        {
+          "note_id": "1486806409082",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "kyynel",
+          "translation": "слеза, слезинка",
+          "timestamp": null
+        },
+        {
+          "note_id": "1486806862755",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "iäkäs",
+          "translation": "пожилой, в возрасте",
+          "timestamp": null
+        },
+        {
+          "note_id": "1488099318852",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "haaskata",
+          "translation": "транжирить, разбазаривать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1490299824904",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Mature",
+          "finnish": "suosio",
+          "translation": "благосклонность, популярность",
+          "timestamp": null
+        },
+        {
+          "note_id": "1491113229620",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "aikakauslehti",
+          "translation": "периодика, журнал",
+          "timestamp": null
+        },
+        {
+          "note_id": "1491153666325",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "alttius",
+          "translation": "уязвимость",
+          "timestamp": null
+        },
+        {
+          "note_id": "1491154609894",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "avustaminen",
+          "translation": "помощь, вклад",
+          "timestamp": null
+        },
+        {
+          "note_id": "1492149394194",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "äskettäin",
+          "translation": "недавно",
+          "timestamp": null
+        },
+        {
+          "note_id": "1498497617461",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "taannoin",
+          "translation": "недавно, в последнее время",
+          "timestamp": null
+        },
+        {
+          "note_id": "1498500132866",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "murhaaja",
+          "translation": "убийца",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536408",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Näkemiin!",
+          "translation": "До свидания!",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536495",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "suklaa",
+          "translation": "шоколад",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536496",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "okei",
+          "translation": "окей",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536497",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "sinulle",
+          "translation": "тебе",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536498",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "vanilja",
+          "translation": "ваниль",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536500",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "selvä",
+          "translation": "ясно",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536501",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "Tuleeko muuta?",
+          "translation": "Хотите еще что-нибудь?",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536502",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "tässä",
+          "translation": "вот, здесь",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536503",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "sentti",
+          "translation": "цент",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536505",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "halpa",
+          "translation": "дешевый",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536506",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "kallis",
+          "translation": "дорогой (о вещах)",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536510",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "milloin",
+          "translation": "когда",
+          "timestamp": null
+        },
+        {
+          "note_id": "1649593536511",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "miksi",
+          "translation": "почему",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110604568",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "hyttysenpisto",
+          "translation": "укус комара",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110722770",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "koulutehtävä",
+          "translation": "школьное задание",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110740405",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "valtio-oppi",
+          "translation": "политология",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110758356",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "itsestäänselvyys",
+          "translation": "само собой разумеющееся",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110768224",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "irtisanoutua",
+          "translation": "увольняться",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110779016",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "vapaaehtoistyö",
+          "translation": "волонтёрство",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110790528",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "ullakkokomero",
+          "translation": "чердак",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110828982",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "työpaikkailmoitus",
+          "translation": "объявление о вакансии",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110871845",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "valittu",
+          "translation": "избранный, выбранный",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110927847",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "suhtautuminen",
+          "translation": "отношение",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110945560",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "sissi",
+          "translation": "партизан",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110957346",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "sademetsä",
+          "translation": "тропический лес",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110971761",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "kolmekymppinen",
+          "translation": "тридцатилетний",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697110991497",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "lehmänlanta",
+          "translation": "коровий навоз",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111002928",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "peltikatto",
+          "translation": "железная крыша",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111027569",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "liitutaulu",
+          "translation": "доска для мела",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111066972",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "tärkeys",
+          "translation": "важность",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111076849",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "haittavaikutus",
+          "translation": "побочный эффект",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111089597",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "statussymboli",
+          "translation": "статусный символ",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111100301",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "koulunkäyntiaste",
+          "translation": "уровень образования",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111114539",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "epätasa-arvo",
+          "translation": "неравенство",
+          "timestamp": null
+        },
+        {
+          "note_id": "1697111412423",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "palkitseva",
+          "translation": "вознаграждающий",
+          "timestamp": null
+        },
+        {
+          "note_id": "1698325401995",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "saituri",
+          "translation": "скряга, скупец",
+          "timestamp": null
+        },
+        {
+          "note_id": "1698325937198",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "heiketä",
+          "translation": "слабеть, ослабевать",
+          "timestamp": null
+        },
+        {
+          "note_id": "1699280961385",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "tarrautua",
+          "translation": "to grip tightly/ to cling",
+          "timestamp": null
+        },
+        {
+          "note_id": "1750771885443",
+          "deck_name": "Finnish::Vaatteet",
+          "anki_level": "Young",
+          "finnish": "uimahousut",
+          "translation": "uimahousut",
+          "timestamp": null
+        }
+      ],
+      "new_studies": [
+        {
+          "note_id": "1649593536544",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "lämmin",
+          "translation": "тёплый",
+          "timestamp": "2025-07-05 10:11:29"
+        },
+        {
+          "note_id": "1649593536545",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "aste",
+          "translation": "градус, степень",
+          "timestamp": "2025-07-05 10:12:09"
+        },
+        {
+          "note_id": "1649593536546",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "aurinko",
+          "translation": "солнце",
+          "timestamp": "2025-07-05 10:12:34"
+        },
+        {
+          "note_id": "1649593536547",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "paistaa (2)",
+          "translation": "жарить",
+          "timestamp": "2025-07-05 10:12:59"
+        },
+        {
+          "note_id": "1649593536548",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "yö",
+          "translation": "ночь",
+          "timestamp": "2025-07-05 10:13:17"
+        },
+        {
+          "note_id": "1649593536549",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "vaikea",
+          "translation": "трудный",
+          "timestamp": "2025-07-05 10:13:56"
+        },
+        {
+          "note_id": "1649593536550",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "nukkua",
+          "translation": "спать",
+          "timestamp": "2025-07-05 10:14:22"
+        },
+        {
+          "note_id": "1649593536551",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "koska",
+          "translation": "потому, что",
+          "timestamp": "2025-07-05 10:14:45"
+        },
+        {
+          "note_id": "1649593536552",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "valoisa",
+          "translation": "светлый",
+          "timestamp": "2025-07-05 10:14:54"
+        },
+        {
+          "note_id": "1649593536553",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "sää",
+          "translation": "погода",
+          "timestamp": "2025-07-05 10:15:12"
+        },
+        {
+          "note_id": "1751705335297",
+          "deck_name": "Finnish::Verbit",
+          "anki_level": "Learning",
+          "finnish": "to drive",
+          "translation": "ajaa (1)",
+          "timestamp": "2025-07-05 11:53:07"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 86,
+        "total_new_studies": 11,
+        "total_level_changes": 0,
+        "decks_studied": [
+          "Finnish::Verbit",
+          "Finnish::Words",
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1"
+        ]
+      }
+    },
+    "2025-07-04": {
+      "reviews": [],
+      "new_studies": [
+        {
+          "note_id": "1442134792329",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "vintti",
+          "translation": "чердак",
+          "timestamp": "2025-07-04 09:31:05"
+        },
+        {
+          "note_id": "1491113229620",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "aikakauslehti",
+          "translation": "периодика, журнал",
+          "timestamp": "2025-07-04 09:23:54"
+        },
+        {
+          "note_id": "1649593536534",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "uutiset",
+          "translation": "новости",
+          "timestamp": "2025-07-04 09:01:07"
+        },
+        {
+          "note_id": "1649593536535",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "joskus",
+          "translation": "иногда",
+          "timestamp": "2025-07-04 09:01:36"
+        },
+        {
+          "note_id": "1649593536536",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "soittaa (+partitiivi) (musiikkia soittimella)",
+          "translation": "играть (на инструменте)",
+          "timestamp": "2025-07-04 09:02:10"
+        },
+        {
+          "note_id": "1649593536537",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "kitara",
+          "translation": "гитара",
+          "timestamp": "2025-07-04 09:03:12"
+        },
+        {
+          "note_id": "1649593536538",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "ilta",
+          "translation": "вечер",
+          "timestamp": "2025-07-04 09:03:46"
+        },
+        {
+          "note_id": "1649593536539",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "opiskelija-asunto",
+          "translation": "студенческое жилье",
+          "timestamp": "2025-07-04 09:04:02"
+        },
+        {
+          "note_id": "1649593536540",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "pieni",
+          "translation": "маленький",
+          "timestamp": "2025-07-04 09:04:33"
+        },
+        {
+          "note_id": "1649593536541",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "elokuu",
+          "translation": "август",
+          "timestamp": "2025-07-04 09:04:59"
+        },
+        {
+          "note_id": "1649593536542",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "kaunis",
+          "translation": "красивый",
+          "timestamp": "2025-07-04 09:05:29"
+        },
+        {
+          "note_id": "1649593536543",
+          "deck_name": "Finnish::Suomen Mestari 1",
+          "anki_level": "Young",
+          "finnish": "ilma",
+          "translation": "воздух, погода",
+          "timestamp": "2025-07-04 09:05:45"
+        },
+        {
+          "note_id": "1698325937198",
+          "deck_name": "Finnish::Words",
+          "anki_level": "Young",
+          "finnish": "heiketä",
+          "translation": "слабеть, ослабевать",
+          "timestamp": "2025-07-04 09:27:13"
+        }
+      ],
+      "level_changes": [],
+      "stats": {
+        "total_reviews": 0,
+        "total_new_studies": 13,
+        "total_level_changes": 0,
+        "decks_studied": [
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     }

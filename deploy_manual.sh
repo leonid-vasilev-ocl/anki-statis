@@ -132,16 +132,31 @@ export_fresh_data() {
 update_activity_log() {
     log "INFO" "Updating activity log..."
     
-    # Check if we have a previous export for comparison
-    local yesterday_export="backups/anki_stats_backup_*.csv"
-    local latest_backup=$(ls -t backups/anki_stats_backup_*.csv 2>/dev/null | head -1)
+    # Find the most recent backup that's NOT from today (to avoid comparing with same-day data)
+    local comparison_file=""
+    local yesterday_date=$(date -v-1d +%Y-%m-%d 2>/dev/null || date -d "yesterday" +%Y-%m-%d)
     
-    if [ -n "$latest_backup" ] && [ -f "$latest_backup" ]; then
-        log "INFO" "Detecting changes since last backup..."
+    # First try to find yesterday's backup
+    local yesterday_backup="backups/anki_stats_backup_${yesterday_date}_*.csv"
+    if ls $yesterday_backup 2>/dev/null | head -1 >/dev/null; then
+        comparison_file=$(ls -t $yesterday_backup 2>/dev/null | head -1)
+        log "INFO" "Found yesterday's backup for comparison: $(basename "$comparison_file")"
+    else
+        # Fall back to most recent backup that's not from today
+        local today_pattern="backups/anki_stats_backup_${DATE}_*.csv"
+        comparison_file=$(ls -t backups/anki_stats_backup_*.csv 2>/dev/null | grep -v "$today_pattern" | head -1)
+        
+        if [ -n "$comparison_file" ]; then
+            log "INFO" "Using previous backup for comparison: $(basename "$comparison_file")"
+        fi
+    fi
+    
+    if [ -n "$comparison_file" ] && [ -f "$comparison_file" ]; then
+        log "INFO" "Detecting changes since $(basename "$comparison_file")..."
         
         # Detect changes
         local changes_file="temp_changes_$DATE.json"
-        if python3 "scripts/detect_changes.py" "$latest_backup" "public/anki_stats.csv" "$changes_file"; then
+        if python3 "scripts/detect_changes.py" "$comparison_file" "public/anki_stats.csv" "$changes_file"; then
             log "SUCCESS" "Changes detected"
             
             # Update activity log

@@ -110,9 +110,19 @@ def update_activity_log(activity_log, changes):
     """
     daily_activity = activity_log.get('daily_activity', {})
     
+    # Check if we have a date field in changes to prevent duplicate processing
+    changes_date = changes.get('date')
+    if changes_date and changes_date in daily_activity:
+        # Check if this date already has data - if so, warn but continue
+        existing_data = daily_activity[changes_date]
+        if (existing_data.get('reviews') or existing_data.get('new_studies') or 
+            existing_data.get('level_changes')):
+            print(f"Warning: Date {changes_date} already has activity data. Merging...")
+    
+    
     # Process reviews
     for review in changes.get('reviews', []):
-        review_date = extract_date_from_timestamp(review.get('new_review'))
+        review_date = extract_date_from_timestamp(review.get('new_review') or review.get('last_review_date'))
         
         if review_date not in daily_activity:
             daily_activity[review_date] = {
