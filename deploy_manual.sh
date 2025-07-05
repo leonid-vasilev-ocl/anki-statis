@@ -181,10 +181,25 @@ EOF
 build_frontend() {
     log "INFO" "Building frontend application..."
     
-    # Copy data files to public folder for build process
-    cp "$WORK_DIR/$TODAY_EXPORT" "public/$CURRENT_EXPORT"
-    cp "$WORK_DIR/$ACTIVITY_LOG" "public/$ACTIVITY_LOG"
-    log "SUCCESS" "Copied data files to public folder"
+    # Define variables for file copying
+    local TODAY_EXPORT="temp_export_${DATE}.csv"
+    local CURRENT_EXPORT="anki_stats.csv"
+    local ACTIVITY_LOG="activity_log.json"
+    
+    # Copy data files to public folder for build process if they exist
+    if [ -f "$TODAY_EXPORT" ]; then
+        cp "$TODAY_EXPORT" "public/$CURRENT_EXPORT"
+        log "SUCCESS" "Copied fresh CSV data to public folder"
+    else
+        log "WARNING" "Fresh export file not found: $TODAY_EXPORT"
+    fi
+    
+    if [ -f "$ACTIVITY_LOG" ]; then
+        cp "$ACTIVITY_LOG" "public/$ACTIVITY_LOG"
+        log "SUCCESS" "Copied activity log to public folder"
+    else
+        log "WARNING" "Activity log not found: $ACTIVITY_LOG"
+    fi
     
     # Check if npm is available and package.json exists
     if command -v npm &> /dev/null && [ -f "package.json" ]; then
