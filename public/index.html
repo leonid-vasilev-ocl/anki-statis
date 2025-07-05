@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Anki Statistics Dashboard</title>
+  <script type="module" crossorigin src="./assets/main-DgzKUlCD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BNHAuY1A.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 data-i18n="title">Anki Statistics Dashboard</h1>
+            <div class="controls">
+                <div class="language-switcher">
+                    <button class="control-btn lang-btn" data-lang="en">EN</button>
+                    <button class="control-btn lang-btn" data-lang="ru">RU</button>
+                </div>
+                <button class="control-btn theme-toggle" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="dashboard">
+            <!-- Filters Section -->
+            <section class="filters-section">
+                <div class="filters-grid">
+                    <select id="deckFilter" class="filter-select">
+                        <option value="" data-i18n="filters.allDecks">All Decks</option>
+                    </select>
+                    <select id="levelFilter" class="filter-select">
+                        <option value="" data-i18n="filters.allLevels">All Levels</option>
+                    </select>
+                    <input type="text" id="searchFilter" class="filter-input" data-i18n-placeholder="filters.searchCards" placeholder="Search cards...">
+                    <button id="clearFilters" class="control-btn" data-i18n="filters.clear">Clear</button>
+                </div>
+            </section>
+
+            <!-- Stats Summary Section -->
+            <section class="stats-summary">
+                <div class="stats-grid">
+                    <div class="stat-card clickable" id="newWordsTodayCard" data-filter="newWordsToday">
+                        <h3 data-i18n="stats.newWordsToday">New Words Today</h3>
+                        <div class="stat-value" id="newWordsToday">0</div>
+                        <span class="stat-unit" data-i18n="stats.words">words</span>
+                    </div>
+                    <div class="stat-card clickable" id="newWordsThisWeekCard" data-filter="newWordsThisWeek">
+                        <h3 data-i18n="stats.newWordsThisWeek">New Words This Week</h3>
+                        <div class="stat-value" id="newWordsThisWeek">0</div>
+                        <span class="stat-unit" data-i18n="stats.words">words</span>
+                    </div>
+                    <div class="stat-card clickable" id="totalCardsCard" data-filter="totalCards">
+                        <h3 data-i18n="stats.totalCards">Total Cards</h3>
+                        <div class="stat-value" id="totalCards">0</div>
+                        <span class="stat-unit" data-i18n="stats.cards">cards</span>
+                    </div>
+                    <div class="stat-card clickable" id="studiedTodayCard" data-filter="studiedToday">
+                        <h3 data-i18n="stats.studiedToday">Studied Today</h3>
+                        <div class="stat-value" id="studiedToday">0</div>
+                        <span class="stat-unit" data-i18n="stats.cards">cards</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Level Distribution Chart -->
+                <section class="chart-section">
+                    <div class="chart-header">
+                        <h2 data-i18n="charts.levelDistribution">Card Level Distribution</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="levelChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Deck Performance Chart -->
+                <section class="chart-section">
+                    <div class="chart-header">
+                        <h2 data-i18n="charts.deckPerformance">Deck Performance</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="deckChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Study Timeline Chart -->
+                <section class="chart-section full-width">
+                    <div class="chart-header">
+                        <h2 data-i18n="charts.studyTimeline">Study Timeline</h2>
+                        <div class="chart-controls">
+                            <select id="timelineZoom" class="filter-select">
+                                <option value="week" data-i18n="timeline.week">Week</option>
+                                <option value="month" data-i18n="timeline.month">Month</option>
+                                <option value="year" data-i18n="timeline.year">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Activity Heatmap -->
+                <section class="chart-section full-width">
+                    <div class="chart-header">
+                        <h2 data-i18n="charts.activityHeatmap">Study Activity Heatmap</h2>
+                        <div class="chart-controls">
+                            <select id="heatmapYear" class="filter-select">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="heatmapChart" class="heatmap-container"></div>
+                    </div>
+                </section>
+
+                <!-- Card Explorer Table -->
+                <section class="chart-section full-width">
+                    <div class="chart-header">
+                        <h2 data-i18n="charts.cardExplorer">Card Explorer</h2>
+                        <div class="chart-controls">
+                            <span id="cardCount" class="card-count">0 cards</span>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="cardTable" class="card-table display responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="table.finnish">Finnish</th>
+                                    <th data-i18n="table.translation">Translation</th>
+                                    <th data-i18n="table.level">Level</th>
+                                    <th data-i18n="table.deck">Deck</th>
+                                    <th data-i18n="table.lastReview">Last Review</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Main application entry point -->
+</body>
+</html>
