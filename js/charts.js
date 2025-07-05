@@ -414,7 +414,7 @@ class ChartsManager {
         height: 12px !important;
         background-color: ${backgroundColor} !important;
         border-radius: 2px !important;
-        cursor: pointer !important;
+        cursor: default !important;
         transition: all 0.2s ease !important;
         border: none !important;
         margin: 0 !important;
@@ -424,21 +424,9 @@ class ChartsManager {
       // Add tooltip
       cell.title = `${dayData.dateStr}: ${dayData.activity} activities`;
       
-      // Add click handler
-      cell.addEventListener('click', () => {
-        this.handleHeatmapCellClick(dayData.dateStr);
-      });
+      // Observe-only heatmap - no click interaction
       
-      // Add hover effect
-      cell.addEventListener('mouseenter', () => {
-        cell.style.transform = 'scale(1.1)';
-        cell.style.border = '1px solid var(--accent-primary)';
-      });
-      
-      cell.addEventListener('mouseleave', () => {
-        cell.style.transform = 'scale(1)';
-        cell.style.border = 'none';
-      });
+      // Observe-only heatmap - no hover effects
       
       grid.appendChild(cell);
     });
@@ -504,19 +492,7 @@ class ChartsManager {
     this.stateManager.toggleDeckFilter(deckName);
   }
   
-  /**
-   * Handle heatmap cell click
-   * @param {string} date - Clicked date
-   */
-  handleHeatmapCellClick(date) {
-    // Set date range filter to the clicked day
-    this.stateManager.updateFilters({
-      dateRange: {
-        start: date,
-        end: date
-      }
-    });
-  }
+  // Removed heatmap click handler - now observe-only
   
   /**
    * Update charts when language changes
