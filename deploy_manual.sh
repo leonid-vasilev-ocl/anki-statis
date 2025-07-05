@@ -196,26 +196,6 @@ EOF
 build_frontend() {
     log "INFO" "Building frontend application..."
     
-    # Define variables for file copying
-    local TODAY_EXPORT="temp_export_${DATE}.csv"
-    local CURRENT_EXPORT="anki_stats.csv"
-    local ACTIVITY_LOG="activity_log.json"
-    
-    # Copy data files to public folder for build process if they exist
-    if [ -f "$TODAY_EXPORT" ]; then
-        cp "$TODAY_EXPORT" "public/$CURRENT_EXPORT"
-        log "SUCCESS" "Copied fresh CSV data to public folder"
-    else
-        log "WARNING" "Fresh export file not found: $TODAY_EXPORT"
-    fi
-    
-    if [ -f "$ACTIVITY_LOG" ]; then
-        cp "$ACTIVITY_LOG" "public/$ACTIVITY_LOG"
-        log "SUCCESS" "Copied activity log to public folder"
-    else
-        log "WARNING" "Activity log not found: $ACTIVITY_LOG"
-    fi
-    
     # Check if npm is available and package.json exists
     if command -v npm &> /dev/null && [ -f "package.json" ]; then
         log "INFO" "Installing dependencies..."
@@ -225,11 +205,24 @@ build_frontend() {
         if npm run build; then
             log "SUCCESS" "Build completed successfully"
             
+            # Preserve activity log before replacing public folder
+            if [ -f "public/activity_log.json" ]; then
+                cp "public/activity_log.json" "temp_activity_log_backup.json"
+                log "INFO" "Backed up activity log before build deployment"
+            fi
+            
             # Replace public folder contents with built files
             if [ -d "dist" ]; then
                 rm -rf public/*
                 cp -r dist/* public/
                 log "SUCCESS" "Deployed built files to public folder"
+                
+                # Restore activity log after deployment
+                if [ -f "temp_activity_log_backup.json" ]; then
+                    cp "temp_activity_log_backup.json" "public/activity_log.json"
+                    rm "temp_activity_log_backup.json"
+                    log "SUCCESS" "Restored activity log after build deployment"
+                fi
             else
                 log "ERROR" "Build output directory 'dist' not found"
                 exit 1
@@ -305,7 +298,7 @@ cleanup() {
     fi
     
     # Remove any remaining temp files
-    rm -f temp_*.csv temp_*.json
+    rm -f temp_*.csv temp_*.json temp_activity_log_backup.json
     
     log "SUCCESS" "Cleanup completed"
 }
