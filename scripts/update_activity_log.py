@@ -120,10 +120,26 @@ def update_activity_log(activity_log, changes):
             print(f"Warning: Date {changes_date} already has activity data. Merging...")
     
     
-    # Process reviews
+    # Group reviews by date first, then replace entire day's data
+    reviews_by_date = {}
     for review in changes.get('reviews', []):
         review_date = extract_date_from_timestamp(review.get('new_review') or review.get('last_review_date'))
         
+        if review_date not in reviews_by_date:
+            reviews_by_date[review_date] = []
+        
+        review_entry = {
+            'note_id': review['note_id'],
+            'deck_name': review['deck_name'],
+            'anki_level': review['anki_level'],
+            'finnish': review['finnish'],
+            'translation': review['translation'],
+            'timestamp': review.get('new_review')
+        }
+        reviews_by_date[review_date].append(review_entry)
+    
+    # Add reviews to existing data (don't replace entire day)
+    for review_date, reviews in reviews_by_date.items():
         if review_date not in daily_activity:
             daily_activity[review_date] = {
                 'reviews': [],
@@ -137,25 +153,32 @@ def update_activity_log(activity_log, changes):
                 }
             }
         
-        # Add review if not already present
-        review_entry = {
-            'note_id': review['note_id'],
-            'deck_name': review['deck_name'],
-            'anki_level': review['anki_level'],
-            'finnish': review['finnish'],
-            'translation': review['translation'],
-            'timestamp': review.get('new_review')
-        }
-        
-        # Check for duplicates (same note_id on same day)
+        # Add new reviews, avoiding duplicates
         existing_review_ids = {r['note_id'] for r in daily_activity[review_date]['reviews']}
-        if review['note_id'] not in existing_review_ids:
-            daily_activity[review_date]['reviews'].append(review_entry)
+        new_reviews = [r for r in reviews if r['note_id'] not in existing_review_ids]
+        daily_activity[review_date]['reviews'].extend(new_reviews)
+        print(f"Added {len(new_reviews)} new reviews for {review_date} (total: {len(daily_activity[review_date]['reviews'])})")
     
-    # Process new studies
+    # Group new studies by date first, then replace entire day's data
+    studies_by_date = {}
     for study in changes.get('new_studies', []):
         study_date = extract_date_from_timestamp(study.get('first_study_date'))
         
+        if study_date not in studies_by_date:
+            studies_by_date[study_date] = []
+        
+        study_entry = {
+            'note_id': study['note_id'],
+            'deck_name': study['deck_name'],
+            'anki_level': study['anki_level'],
+            'finnish': study['finnish'],
+            'translation': study['translation'],
+            'timestamp': study.get('first_study_date')
+        }
+        studies_by_date[study_date].append(study_entry)
+    
+    # Add new studies to existing data (don't replace entire day)
+    for study_date, studies in studies_by_date.items():
         if study_date not in daily_activity:
             daily_activity[study_date] = {
                 'reviews': [],
@@ -169,26 +192,34 @@ def update_activity_log(activity_log, changes):
                 }
             }
         
-        # Add new study if not already present
-        study_entry = {
-            'note_id': study['note_id'],
-            'deck_name': study['deck_name'],
-            'anki_level': study['anki_level'],
-            'finnish': study['finnish'],
-            'translation': study['translation'],
-            'timestamp': study.get('first_study_date')
-        }
-        
-        # Check for duplicates
+        # Add new studies, avoiding duplicates
         existing_study_ids = {s['note_id'] for s in daily_activity[study_date]['new_studies']}
-        if study['note_id'] not in existing_study_ids:
-            daily_activity[study_date]['new_studies'].append(study_entry)
+        new_studies = [s for s in studies if s['note_id'] not in existing_study_ids]
+        daily_activity[study_date]['new_studies'].extend(new_studies)
+        print(f"Added {len(new_studies)} new studies for {study_date} (total: {len(daily_activity[study_date]['new_studies'])})")
     
-    # Process level changes
+    # Group level changes by date first, then replace entire day's data
+    level_changes_by_date = {}
     for level_change in changes.get('level_changes', []):
         # Use today's date for level changes since they represent current state
         change_date = datetime.now().strftime('%Y-%m-%d')
         
+        if change_date not in level_changes_by_date:
+            level_changes_by_date[change_date] = []
+        
+        level_change_entry = {
+            'note_id': level_change['note_id'],
+            'deck_name': level_change['deck_name'],
+            'finnish': level_change['finnish'],
+            'translation': level_change['translation'],
+            'previous_level': level_change['previous_level'],
+            'new_level': level_change['new_level'],
+            'timestamp': datetime.now().isoformat()
+        }
+        level_changes_by_date[change_date].append(level_change_entry)
+    
+    # Add level changes to existing data (don't replace entire day)
+    for change_date, level_changes in level_changes_by_date.items():
         if change_date not in daily_activity:
             daily_activity[change_date] = {
                 'reviews': [],
@@ -202,17 +233,11 @@ def update_activity_log(activity_log, changes):
                 }
             }
         
-        level_change_entry = {
-            'note_id': level_change['note_id'],
-            'deck_name': level_change['deck_name'],
-            'finnish': level_change['finnish'],
-            'translation': level_change['translation'],
-            'previous_level': level_change['previous_level'],
-            'new_level': level_change['new_level'],
-            'timestamp': datetime.now().isoformat()
-        }
-        
-        daily_activity[change_date]['level_changes'].append(level_change_entry)
+        # Add new level changes, avoiding duplicates
+        existing_change_ids = {lc['note_id'] for lc in daily_activity[change_date]['level_changes']}
+        new_level_changes = [lc for lc in level_changes if lc['note_id'] not in existing_change_ids]
+        daily_activity[change_date]['level_changes'].extend(new_level_changes)
+        print(f"Added {len(new_level_changes)} level changes for {change_date} (total: {len(daily_activity[change_date]['level_changes'])})")
     
     # Update statistics for each day
     for date, day_data in daily_activity.items():

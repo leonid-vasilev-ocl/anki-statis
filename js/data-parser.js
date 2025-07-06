@@ -14,6 +14,17 @@ class DataParser {
   }
 
   /**
+   * Convert date to local date string (YYYY-MM-DD) without timezone conversion
+   * @param {Date} date - Date object
+   * @returns {string} Local date string in YYYY-MM-DD format
+   */
+  toLocalDateString(date) {
+    return date.getFullYear() + '-' + 
+           String(date.getMonth() + 1).padStart(2, '0') + '-' + 
+           String(date.getDate()).padStart(2, '0');
+  }
+
+  /**
    * Parse CSV text into structured data
    * @param {string} csvText - Raw CSV text
    * @returns {Array} Array of card objects
@@ -267,7 +278,7 @@ class DataParser {
     const dates = this.generateDateRange(timeframe, now);
 
     dates.forEach(date => {
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = this.toLocalDateString(date);
       const activity = this.historyData[dateStr];
 
       timelineData[dateStr] = {
@@ -286,7 +297,7 @@ class DataParser {
         {
           label: 'Reviews', // Will be translated in ChartsManager
           data: dates.map(date => {
-            const dateStr = date.toISOString().split('T')[0];
+            const dateStr = this.toLocalDateString(date);
             return timelineData[dateStr].reviews;
           }),
           borderColor: 'rgb(75, 192, 192)',
@@ -296,7 +307,7 @@ class DataParser {
         {
           label: 'New Cards', // Will be translated in ChartsManager
           data: dates.map(date => {
-            const dateStr = date.toISOString().split('T')[0];
+            const dateStr = this.toLocalDateString(date);
             return timelineData[dateStr].newCards;
           }),
           borderColor: 'rgb(255, 99, 132)',
@@ -385,7 +396,7 @@ class DataParser {
     let activeDaysFound = 0;
 
     for (let current = new Date(startDate); current <= endDate; current.setDate(current.getDate() + 1)) {
-      const dateStr = current.toISOString().split('T')[0];
+      const dateStr = this.toLocalDateString(current);
       const activity = this.historyData[dateStr];
       const totalActivity = activity?.totalActivity || 0;
       
@@ -492,7 +503,7 @@ class DataParser {
   isCardNewToday(card) {
     if (!this.historyData) return false;
     
-    const today = new Date().toISOString().split('T')[0];
+    const today = this.toLocalDateString(new Date());
     const todayActivity = this.historyData[today];
     
     if (!todayActivity || !todayActivity.newStudies) return false;
@@ -521,7 +532,7 @@ class DataParser {
     const noteId = card.noteId || card.note_id;
     
     for (let date = new Date(startOfWeek); date <= today; date.setDate(date.getDate() + 1)) {
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = this.toLocalDateString(date);
       const dayActivity = this.historyData[dateStr];
       
       if (dayActivity && dayActivity.newStudies) {
@@ -593,7 +604,7 @@ class DataParser {
     }
 
     const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
+    const todayStr = this.toLocalDateString(today);
     
     // Calculate start of this week (Monday)
     const startOfWeek = new Date(today);
@@ -609,7 +620,7 @@ class DataParser {
     // Get this week's new words
     let newWordsThisWeek = 0;
     for (let date = new Date(startOfWeek); date <= today; date.setDate(date.getDate() + 1)) {
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = this.toLocalDateString(date);
       const dayActivity = this.historyData[dateStr];
       if (dayActivity?.newStudies) {
         newWordsThisWeek += dayActivity.newStudies.length;
