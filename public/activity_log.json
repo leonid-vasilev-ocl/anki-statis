@@ -1,7 +1,7 @@
 {
   "metadata": {
     "created": "2025-06-16T10:00:00.000Z",
-    "last_updated": "2025-07-06T11:05:28.940097",
+    "last_updated": "2025-07-06T21:42:48.339613",
     "total_days_tracked": 20,
     "version": "1.0"
   },
@@ -129,9 +129,9 @@
         "total_new_studies": 12,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Grammar",
           "Finnish::Words",
-          "Finnish::Phrases"
+          "Finnish::Phrases",
+          "Finnish::Grammar"
         ]
       }
     },
@@ -1423,8 +1423,8 @@
         "total_level_changes": 0,
         "decks_studied": [
           "Finnish::Words",
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Vaatteet"
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1568,8 +1568,8 @@
         "total_level_changes": 0,
         "decks_studied": [
           "Finnish::Words",
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Phrases"
+          "Finnish::Phrases",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1776,8 +1776,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Vaatteet"
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -4167,10 +4167,10 @@
         "total_new_studies": 20,
         "total_level_changes": 33,
         "decks_studied": [
-          "Finnish::Words",
-          "Finnish::Suomen Mestari 1",
           "Finnish::Verbit",
-          "Finnish::Vaatteet"
+          "Finnish::Words",
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -4905,6 +4905,102 @@
           "finnish": "to sing",
           "translation": "laulaa (1)",
           "timestamp": "2025-07-06 10:08:25"
+        },
+        {
+          "note_id": "1751825427651",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Young",
+          "finnish": "pöytä",
+          "translation": "table",
+          "timestamp": "2025-07-06 21:14:43"
+        },
+        {
+          "note_id": "1751825427653",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Young",
+          "finnish": "tuoli",
+          "translation": "chair",
+          "timestamp": "2025-07-06 21:15:35"
+        },
+        {
+          "note_id": "1751825427655",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "matto",
+          "translation": "carpet / rug",
+          "timestamp": "2025-07-06 21:15:40"
+        },
+        {
+          "note_id": "1751825427657",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "maljakko",
+          "translation": "vase",
+          "timestamp": "2025-07-06 21:15:45"
+        },
+        {
+          "note_id": "1751825427659",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Young",
+          "finnish": "sohva",
+          "translation": "sofa",
+          "timestamp": "2025-07-06 21:15:47"
+        },
+        {
+          "note_id": "1751825427661",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "televisio",
+          "translation": "TV / television",
+          "timestamp": "2025-07-06 21:15:50"
+        },
+        {
+          "note_id": "1751825427663",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "tv-taso",
+          "translation": "TV stand / TV cabinet",
+          "timestamp": "2025-07-06 21:15:53"
+        },
+        {
+          "note_id": "1751825427665",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "kattokruunu",
+          "translation": "chandelier",
+          "timestamp": "2025-07-06 21:16:00"
+        },
+        {
+          "note_id": "1751825427667",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "lamppu",
+          "translation": "lamp",
+          "timestamp": "2025-07-06 21:16:12"
+        },
+        {
+          "note_id": "1751825427669",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "pöytälamppu / yölamppu",
+          "translation": "desk lamp / bedside lamp",
+          "timestamp": "2025-07-06 21:16:25"
+        },
+        {
+          "note_id": "1751825427671",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "nojatuoli",
+          "translation": "armchair",
+          "timestamp": "2025-07-06 21:16:31"
+        },
+        {
+          "note_id": "1751825427673",
+          "deck_name": "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "anki_level": "Learning",
+          "finnish": "ikkuna",
+          "translation": "window",
+          "timestamp": "2025-07-06 21:16:36"
         }
       ],
       "level_changes": [
@@ -4938,13 +5034,14 @@
       ],
       "stats": {
         "total_reviews": 55,
-        "total_new_studies": 20,
+        "total_new_studies": 32,
         "total_level_changes": 3,
         "decks_studied": [
-          "Finnish::Words",
-          "Finnish::Suomen Mestari 1",
           "Finnish::Verbit",
-          "Finnish::Vaatteet"
+          "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
+          "Finnish::Vaatteet",
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Words"
         ]
       }
     }
