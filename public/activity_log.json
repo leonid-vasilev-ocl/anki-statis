@@ -1,7 +1,7 @@
 {
   "metadata": {
     "created": "2025-06-16T10:00:00.000Z",
-    "last_updated": "2025-07-08T08:58:03.085052",
+    "last_updated": "2025-07-08T17:25:26.995993",
     "total_days_tracked": 22,
     "version": "1.0"
   },
@@ -129,9 +129,9 @@
         "total_new_studies": 12,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Grammar",
           "Finnish::Phrases",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Grammar"
         ]
       }
     },
@@ -530,8 +530,8 @@
         "total_new_studies": 19,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -714,8 +714,8 @@
         "total_new_studies": 20,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -912,8 +912,8 @@
         "total_new_studies": 10,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1128,8 +1128,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -1422,9 +1422,9 @@
         "total_new_studies": 22,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
+          "Finnish::Words",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -1600,9 +1600,9 @@
         "total_level_changes": 0,
         "decks_studied": [
           "Finnish::Phrases",
-          "Finnish::Vaatteet",
+          "Finnish::Words",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -1817,8 +1817,8 @@
         "total_new_studies": 21,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -1920,8 +1920,8 @@
         "total_new_studies": 11,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -2032,8 +2032,8 @@
         "total_new_studies": 11,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -2238,8 +2238,8 @@
         "total_new_studies": 10,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Vaatteet",
-          "Finnish::Suomen Mestari 1"
+          "Finnish::Suomen Mestari 1",
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -3073,9 +3073,9 @@
         "total_new_studies": 16,
         "total_level_changes": 17,
         "decks_studied": [
-          "Finnish::Vaatteet",
+          "Finnish::Words",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Vaatteet"
         ]
       }
     },
@@ -4252,10 +4252,10 @@
         "total_new_studies": 20,
         "total_level_changes": 33,
         "decks_studied": [
-          "Finnish::Verbit",
-          "Finnish::Vaatteet",
+          "Finnish::Words",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Vaatteet",
+          "Finnish::Verbit"
         ]
       }
     },
@@ -4382,8 +4382,8 @@
         "total_new_studies": 13,
         "total_level_changes": 0,
         "decks_studied": [
-          "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Words",
+          "Finnish::Suomen Mestari 1"
         ]
       }
     },
@@ -5122,11 +5122,11 @@
         "total_new_studies": 32,
         "total_level_changes": 3,
         "decks_studied": [
-          "Finnish::Words",
-          "Finnish::Verbit",
-          "Finnish::Vaatteet",
+          "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ...",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Koti::[  { \"front\": \"table\", \"back\": \"pöytä\" },  { \" ..."
+          "Finnish::Vaatteet",
+          "Finnish::Verbit",
+          "Finnish::Words"
         ]
       }
     },
@@ -5778,11 +5778,11 @@
         "total_new_studies": 53,
         "total_level_changes": 4,
         "decks_studied": [
-          "Finnish::Words",
-          "Finnish::Verbit",
-          "Finnish::Vaatteet",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Koti"
+          "Finnish::Vaatteet",
+          "Finnish::Verbit",
+          "Finnish::Koti",
+          "Finnish::Words"
         ]
       }
     },
@@ -6954,10 +6954,10 @@
         "total_new_studies": 44,
         "total_level_changes": 28,
         "decks_studied": [
-          "Finnish::Verbit",
-          "Finnish::Koti",
+          "Finnish::Words",
           "Finnish::Suomen Mestari 1",
-          "Finnish::Words"
+          "Finnish::Koti",
+          "Finnish::Verbit"
         ]
       }
     }
